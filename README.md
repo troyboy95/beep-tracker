@@ -48,6 +48,31 @@ python -m beep.ledger --cost        # cost per 1,000 posts from the LLM ledger
 python -m beep.ledger --job 123     # exact LLM input/output behind a post's tags
 ```
 
+## Automation (GitHub Actions)
+
+| Workflow | When | What |
+|---|---|---|
+| `pipeline.yml` | Daily 02:30 UTC (08:00 IST) | Migrations + full refresh (fetch → filter → upsert → expire → tag) |
+| `pipeline.yml` | 06:45, 10:45, 14:45, 18:45, 22:45 UTC | `--tag-only` drain of the LLM tagging queue |
+| `pipeline.yml` | Manual (*Run workflow*) | Choose `full` or `tag_only` |
+| `ci.yml` | Push to `main`, PRs | ruff + pytest |
+
+All pipeline runs share one concurrency group, so they never overlap.
+
+Repo settings → *Secrets and variables* → *Actions*:
+
+| Kind | Name | Value |
+|---|---|---|
+| Secret | `DATABASE_URL` | Supabase **session pooler** connection string |
+| Secret | `GEMINI_API_KEY` | Google AI Studio key |
+| Secret | `REVALIDATE_SECRET` | Same random string as in Vercel *(after Phase 3)* |
+| Variable | `GEMINI_MODEL` | e.g. `gemini-3.1-flash-lite` |
+| Variable | `GEMINI_PRICE_INPUT_PER_M` / `GEMINI_PRICE_OUTPUT_PER_M` | USD per 1M tokens (for cost reporting) |
+| Variable | `HTTP_USER_AGENT` | `BeepTracker/0.1 (+https://github.com/troyboy95/beep-tracker)` |
+| Variable | `REVALIDATE_URL` | `https://<app>.vercel.app/api/revalidate` *(after Phase 3)* |
+
+> GitHub may delay scheduled runs at busy times, and it disables schedules on public repos after 60 days without activity. Use *Run workflow* to trigger manually.
+
 Tagging is a durable queue in Postgres (`jobs.tag_status`). Rate limits or provider outages only delay tags and never lose them: failed items back off and are picked up by the next run.
 
 ## Cost

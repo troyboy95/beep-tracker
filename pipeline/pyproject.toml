@@ -23,6 +23,9 @@ build-backend = "setuptools.build_meta"
 where = ["."]
 include = ["beep*"]
 
+[tool.setuptools.package-data]
+beep = ["sources/*.toml"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py312"

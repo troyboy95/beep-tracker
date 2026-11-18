@@ -106,11 +106,12 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [x] Unit tests: normalize, filters, dedup key, tagger response parsing (32 passing)
 
 ### Phase 2 — Automation
-- [ ] `daily-refresh.yml`: cron (daily, IST-friendly), `workflow_dispatch` for manual runs, secrets, concurrency guard, timeout
-- [ ] `tag-drain.yml`: `python -m beep.run --tag-only` every ~4 h (same concurrency group, so it never overlaps the daily run)
-- [ ] Failure notification (GH Actions email default) and non-zero exit if total fetched = 0
-- [ ] Trigger Vercel on-demand revalidation at the end of the run
-- [ ] `ci.yml`: lint + tests on PR
+- [x] `pipeline.yml`: one workflow, two schedules. Full refresh daily 02:30 UTC (08:00 IST) + migrations; `--tag-only` drain at 06:45/10:45/14:45/18:45/22:45 UTC. `workflow_dispatch` with a mode choice. 45-min timeout.
+- [x] Single concurrency group `beep-pipeline` (`cancel-in-progress: false`): pipeline runs never overlap. This closes the double-tagging gap without DB locks.
+- [x] Failure signal: non-zero exit if fetched = 0 or on exception, which triggers GitHub's failure email. Job summary table on every run (`GITHUB_STEP_SUMMARY`).
+- [x] Vercel on-demand revalidation call at the end of a run (only when something changed; skipped until `REVALIDATE_URL` is set)
+- [x] `ci.yml`: ruff + pytest on push to main and on PRs
+- [ ] Repo secrets/variables configured *(user)*, then one manual `workflow_dispatch` run of each mode verified green
 
 ### Phase 3 — Frontend
 - [ ] Next.js app scaffold, `supabase-js` server client (publishable key, read-only) with types from `supabase gen types` (no ORM, see CHANGELOG)

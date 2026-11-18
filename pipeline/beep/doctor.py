@@ -13,11 +13,11 @@ REQUIRED_TABLES = ("public.jobs", "public.ingest_runs", "public.llm_calls", "pub
 
 
 def _ok(name: str, detail: str = "") -> None:
-    print(f"  [ok]   {name}{' â€” ' + detail if detail else ''}")
+    print(f"  [ok]   {name}{' — ' + detail if detail else ''}")
 
 
 def _fail(name: str, detail: str) -> None:
-    print(f"  [FAIL] {name} â€” {detail}")
+    print(f"  [FAIL] {name} — {detail}")
 
 
 def check_env() -> Settings | None:
@@ -41,7 +41,7 @@ def check_db(s: Settings) -> bool:
                 for t in REQUIRED_TABLES
                 if conn.execute("select to_regclass(%s)", (t,)).fetchone()[0] is None
             ]
-    except Exception as e:  # noqa: BLE001 â€” report any connection error
+    except Exception as e:  # noqa: BLE001 — report any connection error
         _fail("database", f"{type(e).__name__}: {str(e).splitlines()[0]}")
         return False
     if missing:
@@ -71,7 +71,7 @@ def main() -> int:
         return 1
     results = [check_db(s), check_gemini(s)]
     if not s.revalidate_url:
-        print("  [skip] revalidate â€” REVALIDATE_URL not set (expected until web is deployed)")
+        print("  [skip] revalidate — REVALIDATE_URL not set (expected until web is deployed)")
     return 0 if all(results) else 1
 
 

@@ -17,5 +17,14 @@ def test_llm_cost_usd():
     assert s.llm_cost_usd(1_000_000, 100_000) == 0.40
 
 
+def test_empty_env_falls_back_to_default(monkeypatch):
+    # GitHub Actions passes unset repo Variables as empty strings.
+    monkeypatch.setenv("GEMINI_MODEL", "")
+    monkeypatch.setenv("HTTP_USER_AGENT", "")
+    s = _settings()
+    assert s.gemini_model == Settings.model_fields["gemini_model"].default
+    assert s.http_user_agent == Settings.model_fields["http_user_agent"].default
+
+
 def test_secrets_not_leaked_in_repr():
     assert "p@localhost" not in repr(_settings())

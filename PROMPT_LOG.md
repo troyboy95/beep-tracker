@@ -48,3 +48,17 @@ Verbatim log of prompts given to the AI assistant (Claude Code) during developme
 - backoff for failed items; parks an item as `failed` after 3 bad outputs; transient errors never count as failures
 
 Added a `--tag-only` drain mode. Verified on the real 503 backlog: queue 45 → 0, public listings 242 → 277. Explained the `bigint` PK choice (int4 would suffice; bigint is cheap insurance against an FK/array type migration; UUIDs unnecessary) and logged it in the CHANGELOG. Measured cost: $0.178 per 1,000 posts.
+
+### Prompt 7
+> Begin phase 2, and fix the gap with concurrency group. Locks are unnecessary here
+
+**Outcome:**
+- `pipeline.yml`: one workflow, so a single concurrency group serializes all pipeline runs (closes the double-tagging gap without DB locks).
+  - Daily full refresh at 08:00 IST, with migrations.
+  - `--tag-only` drains 5× a day.
+  - Manual run with a mode choice.
+- `ci.yml` runs ruff + pytest.
+- GitHub job summary on every run.
+- Fixed two CI-only issues before shipping: empty repo Variables overriding defaults (`env_ignore_empty` + test), and the editable install needed by `migrate`.
+- Found and fixed UTF-8 corruption from PowerShell text edits (`doctor.py`, workflows).
+- 35 tests pass; workflows parse. Listed the GitHub secrets/variables to configure.

@@ -9,6 +9,7 @@
 
 import argparse
 import logging
+import os
 import sys
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -100,13 +101,34 @@ def main() -> int:
         raise
     finally:
         db.finish_run(conn, run_id, status, stats, errors)
-        log.info("run %d (%s) %s: %s | public listings: %d", run_id, mode, status, stats,
-                 db.public_count(conn))
+        public = db.public_count(conn)
+        log.info("run %d (%s) %s: %s | public listings: %d", run_id, mode, status, stats, public)
+        _step_summary(run_id, mode, status, stats, public, errors)
         conn.close()
 
     if stats["tagged"] or stats["new"] or stats["expired"]:
         _revalidate(settings)
     return 0
+
+
+def _step_summary(run_id, mode, status, stats, public, errors) -> None:
+    """Markdown summary on the GitHub Actions run page (no-op locally)."""
+    path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not path:
+        return
+    lines = [
+        f"## Beep pipeline — run {run_id} ({mode}): **{status}**",
+        "",
+        "| fetched | new | updated | expired | tagged | queue pending | public listings |",
+        "|---|---|---|---|---|---|---|",
+        f"| {stats['fetched']} | {stats['new']} | {stats['updated']} | {stats['expired']} "
+        f"| {stats['tagged']} | {stats['queue']} | {public} |",
+    ]
+    if errors:
+        lines += ["", "### Errors", *[f"- `{e.get('source')}/{e.get('board', '')}`: "
+                                      f"{e.get('message', '')[:200]}" for e in errors]]
+    with open(path, "a", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
 
 
 def _revalidate(settings) -> None:
