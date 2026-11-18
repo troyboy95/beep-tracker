@@ -114,10 +114,14 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [ ] Repo secrets/variables configured *(user)*, then one manual `workflow_dispatch` run of each mode verified green
 
 ### Phase 3 — Frontend
-- [ ] Next.js app scaffold, `supabase-js` server client (publishable key, read-only) with types from `supabase gen types` (no ORM, see CHANGELOG)
-- [ ] Search + filters + pagination via URL params
-- [ ] Last-refreshed badge, empty/error states, responsive layout
-- [ ] Deploy to Vercel; env vars set; revalidate secret
+- [x] Next.js 16 app (`web/`), `supabase-js` server client (publishable key, read-only), types via `supabase gen types` (`npm run gen:types`)
+- [x] Cached data layer: `'use cache'` + `cacheTag('jobs')` + `cacheLife('hours')`. `/api/revalidate` (Bearer secret, timing-safe) expires the tag.
+- [x] Search (Postgres websearch FTS) + role/city filters with counts + Jobs/Internships segment + pagination, all via URL params (works without JS)
+- [x] "Updated …" stamp, empty / out-of-range / error states, skeleton, responsive (verified at 400px and 1440px, light and dark)
+- [x] Monochrome design per `plans/frontend-ref.jpg`: Albert Sans + Source Serif 4, true black/white, grey band
+- [x] CI: web lint + typecheck
+- [ ] Deploy to Vercel (root dir `web`, 3 env vars) *(user)*
+- [ ] Set GitHub `REVALIDATE_URL` variable + `REVALIDATE_SECRET` secret, then verify that a pipeline run revalidates the live site
 
 ### Phase 4 — Hardening & docs
 - [ ] Verify one automated cron run end-to-end in production

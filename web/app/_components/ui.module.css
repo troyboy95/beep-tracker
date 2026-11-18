@@ -1,0 +1,467 @@
+/* ---------------------------------------------------------------- header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: var(--t-lg);
+  letter-spacing: -0.02em;
+}
+
+.mark {
+  width: 34px;
+  height: 22px;
+  color: var(--ink);
+}
+
+/* The one orchestrated motion: the pulse draws itself once on load. The path is visible by
+   default; only motion-OK users get the draw-in, so reduced-motion never hides the logo. */
+.markPath {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .markPath {
+    animation: draw 900ms cubic-bezier(0.65, 0, 0.35, 1) 150ms both;
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 60;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 1.75rem;
+  font-size: var(--t-sm);
+}
+
+.nav a {
+  color: var(--graphite);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- hero */
+.hero {
+  position: relative;
+  padding-block: clamp(3rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem);
+}
+
+.headline {
+  margin: 0;
+  color: var(--ink);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.headLight {
+  display: block;
+  font-weight: 300;
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+}
+
+.headHeavy {
+  display: block;
+  font-weight: 800;
+  font-size: clamp(3rem, 9vw, 6.75rem);
+  letter-spacing: -0.045em;
+}
+
+.lede {
+  max-width: 34rem;
+  margin: 1.5rem 0 2.25rem;
+  font-family: var(--serif);
+  font-size: var(--t-lg);
+  line-height: 1.6;
+  color: var(--graphite);
+}
+
+/* Echo of the reference's photo caption: a black chip carrying real information. */
+.stamp {
+  position: absolute;
+  right: var(--gutter); /* align with the content edge, not the padding edge */
+  bottom: clamp(2.5rem, 6vw, 4rem);
+  margin: 0;
+  padding: 0.3rem 0.6rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: var(--t-xs);
+  line-height: 1.3;
+}
+
+/* ---------------------------------------------------------------- search */
+.search {
+  display: flex;
+  max-width: 40rem;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  height: 3.25rem;
+  padding: 0 1rem;
+  border: 1px solid var(--ink);
+  border-right: 0;
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--t-md);
+}
+
+.searchInput::placeholder {
+  color: var(--ash);
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.button {
+  height: 3.25rem;
+  padding: 0 1.75rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: var(--t-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- filter band */
+.band {
+  background: var(--mist);
+}
+
+.bandInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding-block: 1.25rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: var(--t-xs);
+  color: var(--ash);
+}
+
+.select {
+  min-width: 12rem;
+  height: 2.5rem;
+  padding: 0 2.25rem 0 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--paper)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23767676' stroke-width='1.5'/%3E%3C/svg%3E")
+    no-repeat right 0.85rem center;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--t-sm);
+  appearance: none;
+}
+
+.select:hover {
+  border-color: var(--ash);
+}
+
+.segments {
+  display: flex;
+  align-self: flex-end;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.segment {
+  padding: 0 1rem;
+  line-height: 2.375rem;
+  font-size: var(--t-sm);
+  color: var(--graphite);
+  text-decoration: none;
+}
+
+.segment + .segment {
+  border-left: 1px solid var(--line);
+}
+
+.segment[aria-current="page"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.count {
+  align-self: flex-end;
+  margin: 0 0 0 auto;
+  line-height: 2.5rem;
+  font-size: var(--t-sm);
+  color: var(--graphite);
+}
+
+.count strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.clear {
+  color: var(--graphite);
+}
+
+/* ---------------------------------------------------------------- list */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.columns,
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 10rem 13rem 5rem 4rem;
+  gap: 1.5rem;
+  align-items: baseline;
+}
+
+.columns {
+  padding-block: 1.5rem 0.75rem;
+  font-size: var(--t-xs);
+  color: var(--ash);
+}
+
+.row {
+  padding-block: 1.375rem;
+  border-top: 1px solid var(--line);
+}
+
+.title {
+  color: var(--ink);
+  font-size: var(--t-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.title:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.tag {
+  display: inline-block;
+  margin-left: 0.625rem;
+  padding: 0 0.4rem;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.35rem;
+  vertical-align: 0.2em;
+}
+
+.company {
+  margin: 0.25rem 0 0;
+  font-family: var(--serif);
+  font-size: var(--t-md);
+  color: var(--graphite);
+}
+
+.meta {
+  display: contents; /* city / role / date are grid columns on wide screens */
+}
+
+.cell {
+  margin: 0;
+  font-size: var(--t-sm);
+  color: var(--graphite);
+}
+
+.muted {
+  color: var(--ash);
+}
+
+.apply {
+  justify-self: end;
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--ink);
+  text-underline-offset: 0.25em;
+}
+
+/* ---------------------------------------------------------------- states */
+.empty {
+  padding-block: 4rem 5rem;
+  border-top: 1px solid var(--line);
+}
+
+.emptyTitle {
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+  font-size: var(--t-xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.emptyText {
+  margin: 0;
+  font-family: var(--serif);
+}
+
+.skeleton {
+  height: 5.5rem;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(var(--mist), var(--mist)) 0 1.4rem / 45% 1.1rem no-repeat,
+    linear-gradient(var(--mist), var(--mist)) 0 3.3rem / 25% 0.9rem no-repeat;
+}
+
+/* ---------------------------------------------------------------- pagination */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 2rem 4rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--t-sm);
+}
+
+.pager a {
+  color: var(--ink);
+  font-weight: 600;
+  text-underline-offset: 0.25em;
+}
+
+.pagerOff {
+  color: var(--line);
+}
+
+/* ---------------------------------------------------------------- footer */
+.footer {
+  background: var(--mist);
+  padding-block: 4rem;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2.5rem;
+}
+
+.footerLine {
+  margin: 0.75rem 0 0;
+  font-size: var(--t-xs);
+  color: var(--ash);
+}
+
+.footerHeading {
+  margin: 0 0 0.75rem;
+  color: var(--ink);
+  font-size: var(--t-md);
+  font-weight: 600;
+}
+
+.footerText {
+  max-width: 38rem;
+  margin: 0 0 1rem;
+  font-family: var(--serif);
+  line-height: 1.7;
+}
+
+/* ---------------------------------------------------------------- narrow */
+@media (max-width: 860px) {
+  .stamp {
+    position: static;
+    display: inline-block;
+    margin-top: 1.75rem;
+  }
+
+  .columns {
+    display: none;
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "main apply"
+      "meta meta";
+    gap: 0.5rem 1rem;
+  }
+
+  .main {
+    grid-area: main;
+  }
+
+  .apply {
+    grid-area: apply;
+  }
+
+  /* city, role and date share one line on phones */
+  .meta {
+    grid-area: meta;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+  }
+
+  .count {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .filters,
+  .field {
+    width: 100%;
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav a:first-child {
+    display: none;
+  }
+
+  .button {
+    padding: 0 1.1rem;
+  }
+}

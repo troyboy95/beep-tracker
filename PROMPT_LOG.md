@@ -62,3 +62,15 @@ Added a `--tag-only` drain mode. Verified on the real 503 backlog: queue 45 → 
 - Fixed two CI-only issues before shipping: empty repo Variables overriding defaults (`env_ignore_empty` + test), and the editable install needed by `migrate`.
 - Found and fixed UTF-8 corruption from PowerShell text edits (`doctor.py`, workflows).
 - 35 tests pass; workflows parse. Listed the GitHub secrets/variables to configure.
+
+### Prompt 8
+> Changes pushed, start phase 3 - frontend. Keep the UI monotonous, no multi-color. Sleek, elegant. Check plans/frontend-ref.jpg as ref img
+
+**Outcome:** Built `web/` on Next.js 16.4.6 (Cache Components + Partial Prerendering; checked APIs against the bundled docs).
+- Data layer: `'use cache'` + `cacheTag('jobs')`; `/api/revalidate` endpoint; types generated from the DB.
+- Features: full-text search, role/city filters with counts, Jobs/Internships segment, pagination. All URL-driven and working without JS.
+- Monochrome design after the reference: two-weight Albert Sans headline, Source Serif 4 prose, black chip reused as the "Updated" timestamp, grey filter band, heartbeat logo. Dark mode inverts the same scale.
+- Verified with headless screenshots at 1440px and 400px, light and dark. Fixed three issues they caught: chip overflow, logo invisible under reduced motion, long-title overflow.
+- Checked the revalidate endpoint auth (401/401/200/405).
+- CI gains a web lint + typecheck job.
+- Vercel deploy steps documented for the user.

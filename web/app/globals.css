@@ -1,0 +1,89 @@
+/* Monochrome tokens. Dark mode inverts the same scale; no hue anywhere. */
+:root {
+  --ink: #000000;
+  --graphite: #3d3d3d;
+  --ash: #767676;
+  --line: #e4e4e4;
+  --mist: #f3f3f3;
+  --paper: #ffffff;
+
+  --sans: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
+  --serif: var(--font-serif), Georgia, "Times New Roman", serif;
+
+  /* Type scale (~1.25 ratio) */
+  --t-xs: 0.8125rem;  /* 13 */
+  --t-sm: 0.9375rem;  /* 15 */
+  --t-md: 1.0625rem;  /* 17 */
+  --t-lg: 1.25rem;    /* 20 */
+  --t-xl: 1.75rem;    /* 28 */
+
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --measure: 1200px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #ffffff;
+    --graphite: #cfcfcf;
+    --ash: #9a9a9a;
+    --line: #262626;
+    --mist: #141414;
+    --paper: #000000;
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--graphite);
+  font-family: var(--sans);
+  font-size: var(--t-md);
+  line-height: 1.55;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

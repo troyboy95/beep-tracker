@@ -21,7 +21,7 @@ GitHub Actions (daily cron) ── Python pipeline ──▶ Supabase Postgres �
 |---|---|
 | `pipeline/` | Python ingestion pipeline (`beep` package) |
 | `db/migrations/` | Versioned schema: tables, dedup view, RLS, append-only LLM ledger, tag queue |
-| `web/` | Next.js frontend *(Phase 3)* |
+| `web/` | Next.js 16 frontend (see [`web/README.md`](web/README.md)) |
 | `SOURCES.md` | Data sources and their terms |
 
 ## Local setup
@@ -47,6 +47,12 @@ python -m beep.run --tag-only       # drain the LLM tagging queue only
 python -m beep.ledger --cost        # cost per 1,000 posts from the LLM ledger
 python -m beep.ledger --job 123     # exact LLM input/output behind a post's tags
 ```
+
+## Deploying the web app (Vercel)
+
+1. Vercel → *Add New Project* → import `troyboy95/beep-tracker`. Set **Root Directory** to `web`; the framework is auto-detected as Next.js.
+2. Add these environment variables: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` and `REVALIDATE_SECRET`.
+3. Deploy. Then, in GitHub Actions settings, set the variable `REVALIDATE_URL=https://<app>.vercel.app/api/revalidate` and the secret `REVALIDATE_SECRET` (same value as in Vercel).
 
 ## Automation (GitHub Actions)
 
