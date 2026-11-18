@@ -1,7 +1,9 @@
 import { Suspense } from "react";
 import { Footer, Header } from "./_components/chrome";
-import { Hero, SearchForm } from "./_components/hero";
+import { Hero } from "./_components/hero";
 import { Listings, ListingsSkeleton } from "./_components/listings";
+import { NavProvider } from "./_components/nav";
+import { SearchForm } from "./_components/search-form";
 import { parseFilters } from "@/lib/params";
 
 type SP = PageProps<"/">["searchParams"];
@@ -21,14 +23,16 @@ export default function Home({ searchParams }: PageProps<"/">) {
     <>
       <Header />
       <main>
-        <Hero>
-          <Suspense fallback={<SearchForm />}>
-            <SearchWithParams searchParams={searchParams} />
+        <NavProvider>
+          <Hero>
+            <Suspense fallback={<SearchForm />}>
+              <SearchWithParams searchParams={searchParams} />
+            </Suspense>
+          </Hero>
+          <Suspense fallback={<ListingsSkeleton />}>
+            <ListingsWithParams searchParams={searchParams} />
           </Suspense>
-        </Hero>
-        <Suspense fallback={<ListingsSkeleton />}>
-          <ListingsWithParams searchParams={searchParams} />
-        </Suspense>
+        </NavProvider>
       </main>
       <Footer />
     </>

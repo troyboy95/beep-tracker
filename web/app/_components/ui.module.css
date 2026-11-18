@@ -109,9 +109,21 @@
 }
 
 /* ---------------------------------------------------------------- search */
+.searchBlock {
+  max-width: 40rem;
+}
+
 .search {
   display: flex;
-  max-width: 40rem;
+}
+
+/* Reserved line under the input: the min-length hint appears without moving anything. */
+.hint {
+  min-height: 1.25rem;
+  margin: 0.5rem 0 0;
+  font-size: var(--t-xs);
+  line-height: 1.25rem;
+  color: var(--ash);
 }
 
 .searchInput {
@@ -237,6 +249,17 @@
 
 .clear {
   color: var(--graphite);
+}
+
+/* ---------------------------------------------------------------- results */
+/* While new results load, the current ones stay put (dimmed), and nothing moves or reflows. */
+.results {
+  scroll-margin-top: 1rem;
+  transition: opacity 160ms ease;
+}
+
+.results[aria-busy="true"] {
+  opacity: 0.45;
 }
 
 /* ---------------------------------------------------------------- list */

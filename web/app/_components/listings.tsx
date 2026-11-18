@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { formatDay } from "@/lib/format";
 import { getFacets, getJobs, PAGE_SIZE, type Facets, type Job, type JobFilters } from "@/lib/jobs";
 import { hrefFor } from "@/lib/params";
-import { AutoSubmitSelect } from "./auto-submit-select";
+import { FilterSelect } from "./filter-select";
+import { NavLink, Results } from "./nav";
 import ui from "./ui.module.css";
 
 const TYPES: { value: JobFilters["type"]; label: string }[] = [
@@ -24,20 +24,22 @@ export async function Listings({ filters }: { filters: JobFilters }) {
         filtered={filtered}
       />
       <section className="wrap" aria-label="Openings">
-        {result.kind === "out_of_range" ? (
-          <Empty title="This page is past the end of the results.">
-            <Link href={hrefFor(filters, { page: 1 })}>Go to the first page</Link>.
-          </Empty>
-        ) : result.jobs.length === 0 ? (
-          <Empty title="No openings match these filters.">
-            Try a broader search, or <Link href="/">clear all filters</Link>.
-          </Empty>
-        ) : (
-          <>
-            <JobList jobs={result.jobs} />
-            <Pager filters={filters} total={result.total} />
-          </>
-        )}
+        <Results navKey={hrefFor(filters, { page: filters.page })}>
+          {result.kind === "out_of_range" ? (
+            <Empty title="This page is past the end of the results.">
+              <NavLink href={hrefFor(filters, { page: 1 })}>Go to the first page</NavLink>.
+            </Empty>
+          ) : result.jobs.length === 0 ? (
+            <Empty title="No openings match these filters.">
+              Try a broader search, or <NavLink href="/">clear all filters</NavLink>.
+            </Empty>
+          ) : (
+            <>
+              <JobList jobs={result.jobs} />
+              <Pager filters={filters} total={result.total} />
+            </>
+          )}
+        </Results>
       </section>
     </>
   );
@@ -62,25 +64,25 @@ function FilterBand({
           {filters.type && <input type="hidden" name="type" value={filters.type} />}
           <label className={ui.field}>
             Role
-            <AutoSubmitSelect name="role" defaultValue={filters.role} className={ui.select}>
+            <FilterSelect name="role" filters={filters} className={ui.select}>
               <option value="">All roles</option>
               {facets.roles.map((r) => (
                 <option key={r.value} value={r.value}>
                   {r.value} ({r.count})
                 </option>
               ))}
-            </AutoSubmitSelect>
+            </FilterSelect>
           </label>
           <label className={ui.field}>
             City
-            <AutoSubmitSelect name="city" defaultValue={filters.city} className={ui.select}>
+            <FilterSelect name="city" filters={filters} className={ui.select}>
               <option value="">All cities</option>
               {facets.cities.map((c) => (
                 <option key={c.value} value={c.value}>
                   {c.value} ({c.count})
                 </option>
               ))}
-            </AutoSubmitSelect>
+            </FilterSelect>
           </label>
           <noscript>
             <button type="submit" className={ui.button}>
@@ -91,14 +93,14 @@ function FilterBand({
 
         <nav className={ui.segments} aria-label="Opening type">
           {TYPES.map((t) => (
-            <Link
+            <NavLink
               key={t.label}
               href={hrefFor(filters, { type: t.value })}
               className={ui.segment}
               aria-current={filters.type === t.value ? "page" : undefined}
             >
               {t.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
@@ -106,9 +108,9 @@ function FilterBand({
           {total === null ? null : filtered ? (
             <>
               <strong>{total}</strong> of {facets.total} openings &nbsp;
-              <Link href="/" className={ui.clear}>
+              <NavLink href="/" className={ui.clear}>
                 Clear filters
-              </Link>
+              </NavLink>
             </>
           ) : (
             <>
@@ -174,11 +176,15 @@ function Pager({ filters, total }: { filters: JobFilters; total: number }) {
   const next = filters.page < pages ? hrefFor(filters, { page: filters.page + 1 }) : null;
   return (
     <nav className={ui.pager} aria-label="Pages">
-      {prev ? <Link href={prev}>Previous</Link> : <span className={ui.pagerOff}>Previous</span>}
+      {prev ? (
+        <NavLink href={prev}>Previous</NavLink>
+      ) : (
+        <span className={ui.pagerOff}>Previous</span>
+      )}
       <span>
         Page {filters.page} of {pages}
       </span>
-      {next ? <Link href={next}>Next</Link> : <span className={ui.pagerOff}>Next</span>}
+      {next ? <NavLink href={next}>Next</NavLink> : <span className={ui.pagerOff}>Next</span>}
     </nav>
   );
 }
