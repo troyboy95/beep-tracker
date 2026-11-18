@@ -1,0 +1,83 @@
+# Curated ATS boards with India openings. Verified by scripts/probe_boards.py on 2026-11-18
+# (HTTP 200 + at least one India-located post). `name` is the display name used in the UI.
+# Re-run the probe periodically; boards that 404 are logged as run errors, not fatal.
+
+greenhouse = [
+  { token = "razorpaysoftwareprivatelimited", name = "Razorpay" },
+  { token = "groww", name = "Groww" },
+  { token = "druva", name = "Druva" },
+  { token = "rubrik", name = "Rubrik" },
+  { token = "databricks", name = "Databricks" },
+  { token = "stripe", name = "Stripe" },
+  { token = "mongodb", name = "MongoDB" },
+  { token = "okta", name = "Okta" },
+  { token = "twilio", name = "Twilio" },
+  { token = "purestorage", name = "Pure Storage" },
+  { token = "airbnb", name = "Airbnb" },
+  { token = "gitlab", name = "GitLab" },
+  { token = "elastic", name = "Elastic" },
+  { token = "coinbase", name = "Coinbase" },
+  { token = "zscaler", name = "Zscaler" },
+  { token = "hackerrank", name = "HackerRank" },
+  { token = "turing", name = "Turing" },
+  { token = "observeai", name = "Observe.AI" },
+  { token = "highradius", name = "HighRadius" },
+  { token = "inmobi", name = "InMobi" },
+  { token = "glance", name = "Glance" },
+  { token = "toast", name = "Toast" },
+  { token = "samsara", name = "Samsara" },
+  { token = "datadog", name = "Datadog" },
+  { token = "figma", name = "Figma" },
+  { token = "anthropic", name = "Anthropic" },
+  { token = "fivetran", name = "Fivetran" },
+  { token = "sumologic", name = "Sumo Logic" },
+  { token = "newrelic", name = "New Relic" },
+  { token = "agoda", name = "Agoda" },
+  { token = "netskope", name = "Netskope" },
+  { token = "pubmatic", name = "PubMatic" },
+  { token = "commvault", name = "Commvault" },
+  { token = "zuora", name = "Zuora" },
+  { token = "zoominfo", name = "ZoomInfo" },
+  { token = "zinnia", name = "Zinnia" },
+  { token = "jfrog", name = "JFrog" },
+  { token = "appian", name = "Appian" },
+  { token = "adyen", name = "Adyen" },
+  { token = "xendit", name = "Xendit" },
+]
+
+lever = [
+  { token = "paytm", name = "Paytm" },
+  { token = "fampay", name = "FamPay" },
+  { token = "meesho", name = "Meesho" },
+  { token = "zeta", name = "Zeta" },
+  { token = "nium", name = "Nium" },
+  { token = "cred", name = "CRED" },
+  { token = "mindtickle", name = "Mindtickle" },
+  { token = "pocketfm", name = "Pocket FM" },
+  { token = "spotify", name = "Spotify" },
+]
+
+ashby = [
+  { token = "sarvam", name = "Sarvam AI" },
+  { token = "composio", name = "Composio" },
+  { token = "atlan", name = "Atlan" },
+  { token = "spotdraft", name = "SpotDraft" },
+  { token = "smallest", name = "Smallest.ai" },
+  { token = "openai", name = "OpenAI" },
+  { token = "notion", name = "Notion" },
+]
+
+smartrecruiters = [
+  { token = "BoschGroup", name = "Bosch" },
+  { token = "Swiggy", name = "Swiggy" },
+  { token = "ServiceNow", name = "ServiceNow" },
+  { token = "NielsenIQ", name = "NielsenIQ" },
+  { token = "Sutherland", name = "Sutherland" },
+  { token = "AbbVie", name = "AbbVie" },
+  { token = "LinkedIn3", name = "LinkedIn" },
+  { token = "Experian", name = "Experian" },
+  { token = "Freshworks", name = "Freshworks" },
+  { token = "Continental", name = "Continental" },
+  { token = "Ubisoft2", name = "Ubisoft" },
+  { token = "WesternDigital", name = "Western Digital" },
+]

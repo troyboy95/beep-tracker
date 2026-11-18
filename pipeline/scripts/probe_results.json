@@ -1,0 +1,601 @@
+[
+ {
+  "ats": "smartrecruiters",
+  "token": "BoschGroup",
+  "total": 652,
+  "india": 652,
+  "fresher": 13,
+  "sample": [
+   "IN_Bosch Rexroth India_Engineer / Executive _ Engineering Change Management & Project Co-ordination [entry_level]",
+   "STIBO STEP Jr Developer [associate]",
+   "Electrical and Electronics Systems Integration Specialist [entry_level]",
+   "IN_RBAI_Senior Process Engineer Pick and Place [entry_level]"
+  ]
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "AbbVie",
+  "total": 41,
+  "india": 41,
+  "fresher": 9,
+  "sample": [
+   "Key Account Specialist, FA [entry_level]",
+   "Business Development Mgr - Neuro [entry_level]",
+   "Allergan Medical Institute - Clinical Specialists   [entry_level]",
+   "MEDICAL SCIENCE LIAISON, ONCOLOGY [entry_level]"
+  ]
+ },
+ {
+  "ats": "greenhouse",
+  "token": "rubrik",
+  "total": 197,
+  "india": 39,
+  "fresher": 4,
+  "sample": [
+   "ENG Project/ Program - Intern",
+   "Payroll Industrial Trainee",
+   "Product Management Intern",
+   "Software Engineer (CPD) - Winter Intern"
+  ]
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "NielsenIQ",
+  "total": 76,
+  "india": 76,
+  "fresher": 3,
+  "sample": [
+   "Associate Software Test Engineer (Java, Selenium) [mid_senior_level]",
+   "Associate Software Test Engineer (Playwright, Typescript/ Javascript) [mid_senior_level]",
+   "Jr. Customer Support Analyst [mid_senior_level]"
+  ]
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "Swiggy",
+  "total": 179,
+  "india": 179,
+  "fresher": 3,
+  "sample": [
+   "Vulnerability Management Engineer [entry_level]",
+   "Social Media Intern [not_applicable]",
+   "Captain 2 [entry_level]"
+  ]
+ },
+ {
+  "ats": "greenhouse",
+  "token": "stripe",
+  "total": 794,
+  "india": 45,
+  "fresher": 2,
+  "sample": [
+   "Operations Associate, Apprenticeship",
+   "Software Engineer, Intern"
+  ]
+ },
+ {
+  "ats": "greenhouse",
+  "token": "hackerrank",
+  "total": 33,
+  "india": 18,
+  "fresher": 2,
+  "sample": [
+   "AI Researcher Intern",
+   "Software Development Engineer Intern"
+  ]
+ },
+ {
+  "ats": "lever",
+  "token": "fampay",
+  "total": 14,
+  "india": 14,
+  "fresher": 2,
+  "sample": [
+   "People Operations Intern",
+   "Security Engineer Intern"
+  ]
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "LinkedIn3",
+  "total": 41,
+  "india": 41,
+  "fresher": 2,
+  "sample": [
+   "Account Executive - Talent Solutions  [entry_level]",
+   "Account Executive, LinkedIn Sales Solutions - Academics [entry_level]"
+  ]
+ },
+ {
+  "ats": "greenhouse",
+  "token": "sumologic",
+  "total": 25,
+  "india": 12,
+  "fresher": 1,
+  "sample": [
+   "Technical Account Engineer I"
+  ]
+ },
+ {
+  "ats": "greenhouse",
+  "token": "adyen",
+  "total": 239,
+  "india": 3,
+  "fresher": 1,
+  "sample": [
+   "IT Internal Control Officer "
+  ]
+ },
+ {
+  "ats": "ashby",
+  "token": "sarvam",
+  "total": 48,
+  "india": 48,
+  "fresher": 1,
+  "sample": [
+   "Marketing internship (brand & communication)"
+  ]
+ },
+ {
+  "ats": "ashby",
+  "token": "composio",
+  "total": 32,
+  "india": 4,
+  "fresher": 1,
+  "sample": [
+   "Product  Ops Intern"
+  ]
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "Continental",
+  "total": 12,
+  "india": 12,
+  "fresher": 1,
+  "sample": [
+   "Laboratory Technician [entry_level]"
+  ]
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "Sutherland",
+  "total": 53,
+  "india": 53,
+  "fresher": 1,
+  "sample": [
+   "Campus Associates - FY'27 - Hyderabad / Bengaluru [mid_senior_level]"
+  ]
+ },
+ {
+  "ats": "greenhouse",
+  "token": "razorpaysoftwareprivatelimited",
+  "total": 28,
+  "india": 24,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "groww",
+  "total": 9,
+  "india": 9,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "druva",
+  "total": 27,
+  "india": 11,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "databricks",
+  "total": 897,
+  "india": 78,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "mongodb",
+  "total": 397,
+  "india": 71,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "okta",
+  "total": 358,
+  "india": 104,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "twilio",
+  "total": 113,
+  "india": 15,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "purestorage",
+  "total": 385,
+  "india": 63,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "airbnb",
+  "total": 200,
+  "india": 12,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "gitlab",
+  "total": 250,
+  "india": 33,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "elastic",
+  "total": 374,
+  "india": 17,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "coinbase",
+  "total": 255,
+  "india": 10,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "zscaler",
+  "total": 387,
+  "india": 90,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "turing",
+  "total": 44,
+  "india": 8,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "observeai",
+  "total": 10,
+  "india": 5,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "highradius",
+  "total": 68,
+  "india": 45,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "inmobi",
+  "total": 75,
+  "india": 45,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "glance",
+  "total": 27,
+  "india": 15,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "toast",
+  "total": 330,
+  "india": 19,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "samsara",
+  "total": 313,
+  "india": 4,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "datadog",
+  "total": 382,
+  "india": 9,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "figma",
+  "total": 143,
+  "india": 2,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "anthropic",
+  "total": 657,
+  "india": 6,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "fivetran",
+  "total": 183,
+  "india": 18,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "newrelic",
+  "total": 42,
+  "india": 4,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "agoda",
+  "total": 349,
+  "india": 12,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "netskope",
+  "total": 124,
+  "india": 19,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "pubmatic",
+  "total": 77,
+  "india": 30,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "commvault",
+  "total": 53,
+  "india": 8,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "zuora",
+  "total": 40,
+  "india": 7,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "zoominfo",
+  "total": 86,
+  "india": 12,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "zinnia",
+  "total": 21,
+  "india": 12,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "jfrog",
+  "total": 77,
+  "india": 6,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "appian",
+  "total": 157,
+  "india": 15,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "xendit",
+  "total": 22,
+  "india": 4,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "greenhouse",
+  "token": "ebanx",
+  "total": 33,
+  "india": 1,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "lever",
+  "token": "cred",
+  "total": 13,
+  "india": 12,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "lever",
+  "token": "meesho",
+  "total": 47,
+  "india": 46,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "lever",
+  "token": "zeta",
+  "total": 30,
+  "india": 25,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "lever",
+  "token": "mindtickle",
+  "total": 20,
+  "india": 17,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "lever",
+  "token": "nium",
+  "total": 32,
+  "india": 14,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "lever",
+  "token": "spotify",
+  "total": 91,
+  "india": 1,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "lever",
+  "token": "pocketfm",
+  "total": 12,
+  "india": 2,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "ashby",
+  "token": "atlan",
+  "total": 7,
+  "india": 3,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "ashby",
+  "token": "openai",
+  "total": 838,
+  "india": 9,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "ashby",
+  "token": "notion",
+  "total": 167,
+  "india": 2,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "ashby",
+  "token": "smallest",
+  "total": 3,
+  "india": 3,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "ashby",
+  "token": "spotdraft",
+  "total": 18,
+  "india": 13,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "Ubisoft2",
+  "total": 7,
+  "india": 7,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "ServiceNow",
+  "total": 86,
+  "india": 86,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "Freshworks",
+  "total": 25,
+  "india": 25,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "Experian",
+  "total": 40,
+  "india": 40,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "WesternDigital",
+  "total": 1,
+  "india": 1,
+  "fresher": 0,
+  "sample": []
+ },
+ {
+  "ats": "smartrecruiters",
+  "token": "AtosSyntel",
+  "total": 1,
+  "india": 1,
+  "fresher": 0,
+  "sample": []
+ }
+]

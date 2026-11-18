@@ -1,0 +1,39 @@
+# Prompt Log
+
+Verbatim log of prompts given to the AI assistant (Claude Code) during development, kept for the demo. Append new sessions at the bottom.
+
+---
+
+## Session fb377eb2 — 2026-11-17 (device: LAPTOP-CUUHKO8Q)
+
+### Prompt 1
+> File has the task that we have to accomplish. Ignore point 3 (for execution purpose, but consider for planning). Here's what I've planned for its implementation:
+> Frontend - We'll use next.js, deploy on vercel
+> Backend - FastAPI (for easy LLM calls & data integration, could have picked Node.js + Express too), deploy on Oracle Cloud free VM via public IP & selective IP allow-list.
+> LLM - Gemini 2.5 flash for a tagging
+> Job boards public API - like Greenhouse, etc.
+>
+> Goal is to complete the task, ensure prod level implementation without unnecessary complexity, and least possible cost (as per point 3). Review the plan, suggest corrections as a senior engineer and then create an IMPLEMENTATION_PLAN.md file consisting a brief plan, alsow works as checklist.
+> We'll also need to keep prompt logs for this session, for the demo, so create a log file. Furthermoe, as a standard parctice create a CHANGELOG.md, which consists of the all design decisions & basic context. Follow a tabular rule with cols - What, When, Why, Where
+
+**Outcome:** Reviewed the plan. Replaced the always-on FastAPI server on the Oracle VM with a GitHub Actions cron Python pipeline writing to Supabase Postgres. Dropped the IP allow-list (not workable with Vercel). Broadened sources beyond Greenhouse. Hardened the LLM tagging approach. Created `IMPLEMENTATION_PLAN.md`, `CHANGELOG.md`, `PROMPT_LOG.md` and `.gitignore`.
+
+### Prompt 2
+> I also suggest that we keep track record of the LLM calls, input & output to the LLM, like a ledger
+
+**Outcome:** Added an append-only `llm_calls` ledger table: exact request and response, model, prompt version/hash, tokens, latency, cost, retries and errors. Linked each job to its tagging call via `jobs.tag_call_id`. Kept it hidden from the public via RLS. Added a ledger CLI to the checklist. Point-3 cost and accuracy checks now come from the ledger. Updated `IMPLEMENTATION_PLAN.md` and `CHANGELOG.md`.
+
+### Prompt 3
+> start phase 0, and at the end of the scaffold, notify me with creds reqd from Supaase & elsewhere. Keep an .env.example
+
+**Outcome (in progress):** `git init` done. Wrote `db/schema.sql` (tables, `public_jobs` dedup view, RLS, append-only ledger trigger), `.env.example`, `SOURCES.md`, and the Python pipeline skeleton (`pipeline/pyproject.toml`, `beep/config.py`, `beep/sources/base.py`, `companies.toml`). Interrupted by Prompt 4.
+
+### Prompt 4
+> Wouldn't it be advisable to use ORM, drizzle is good
+
+**Outcome:** Reviewed ORM trade-offs. Drizzle is TypeScript-only, so it can't serve the Python pipeline. Recommended keeping SQL as the schema source of truth and optionally using Drizzle (introspected) for typed reads in `web/`. Waiting for the user's decision.
+
+### Prompt 5
+> go with A, continue phase 0
+
+**Outcome:** Chose Option A (no ORM; `supabase-js` + generated types in web). Finished the Phase 0 scaffold: `beep.doctor` credential/connectivity checker, config tests, README, `.gitignore` update. Venv install, `ruff` and `pytest` (2 passed) all succeed. `doctor` correctly reports missing creds. Updated the checklist and changelog. Sent the user the list of required credentials.
