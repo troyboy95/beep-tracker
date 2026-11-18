@@ -84,3 +84,8 @@ Added a `--tag-only` drain mode. Verified on the real 503 backlog: queue 45 → 
 > Looks alright, proceed with no bindings
 
 **Outcome:** Finalized `vercel.json` (one public `web` service). Updated the README deploy steps (project root = repo root, not `web`), CHANGELOG and plan.
+
+### Prompt 11
+> Ran one full workflow, still seeing 276 openings
+
+**Outcome:** Traced the run across GitHub Actions (success), the DB (`ingest_runs` #4: manual/full/success, 0 new, 1 updated, 1 tagged) and the live page (stamp updated to the run's finish time without a redeploy). This confirmed the full prod chain, including revalidation. Explained 277 → 276: one Paytm "Team Leader" post was edited upstream, re-tagged, and is now correctly non-fresher. That surfaced a pre-filter gap ("Leader" isn't matched as a senior title). Re-ran the UI interaction suite against prod: all behaviour checks pass.

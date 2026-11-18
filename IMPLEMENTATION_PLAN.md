@@ -111,7 +111,8 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [x] Failure signal: non-zero exit if fetched = 0 or on exception, which triggers GitHub's failure email. Job summary table on every run (`GITHUB_STEP_SUMMARY`).
 - [x] Vercel on-demand revalidation call at the end of a run (only when something changed; skipped until `REVALIDATE_URL` is set)
 - [x] `ci.yml`: ruff + pytest on push to main and on PRs
-- [ ] Repo secrets/variables configured *(user)*, then one manual `workflow_dispatch` run of each mode verified green
+- [x] Repo secrets/variables configured *(user)*; manual `full` run verified green (run #4, 2026-11-18 17:36 UTC)
+- [ ] Manual `tag_only` run verified (or first scheduled drain)
 
 ### Phase 3 — Frontend
 - [x] Next.js 16 app (`web/`), `supabase-js` server client (publishable key, read-only), types via `supabase gen types` (`npm run gen:types`)
@@ -121,11 +122,14 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [x] Monochrome design per `plans/frontend-ref.jpg`: Albert Sans + Source Serif 4, true black/white, grey band
 - [x] CI: web lint + typecheck
 - [x] `vercel.json` (Services: one public `web` service; pipeline stays on GitHub Actions; no bindings)
-- [ ] Deploy to Vercel (project root = repo root, 3 env vars) *(user)*
-- [ ] Set GitHub `REVALIDATE_URL` variable + `REVALIDATE_SECRET` secret, then verify that a pipeline run revalidates the live site
+- [x] Deployed to Vercel: https://beep-tracker.vercel.app
+- [x] GitHub `REVALIDATE_URL` + `REVALIDATE_SECRET` set; verified that the pipeline run revalidated the live site (stamp → 23:06 IST, count 277 → 276 with no redeploy)
+- [x] Live-search (debounced, ≥ 4 chars) + transition-based filters; Playwright checks pass on prod
 
 ### Phase 4 — Hardening & docs
-- [ ] Verify one automated cron run end-to-end in production
+- [x] Verify one GitHub-run pipeline end-to-end in production (manual dispatch, 2026-11-18)
+- [ ] Verify the first *scheduled* runs (drain 18:45 UTC, full 02:30 UTC)
+- [ ] Add `leader` to `SENIOR_TITLE` (Paytm "Team Leader" slipped through as `no_signal`)
 - [ ] README: architecture diagram, setup, run locally, costs
 - [ ] CHANGELOG.md kept current; PROMPT_LOG.md updated each session
 - [ ] "What broke & how we fixed it" notes captured in CHANGELOG as they happen (video material)
