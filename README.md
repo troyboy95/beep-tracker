@@ -50,7 +50,9 @@ python -m beep.ledger --job 123     # exact LLM input/output behind a post's tag
 
 ## Deploying the web app (Vercel)
 
-1. Vercel → *Add New Project* → import `troyboy95/beep-tracker`. Set **Root Directory** to `web`; the framework is auto-detected as Next.js.
+The repo deploys with [Vercel Services](https://vercel.com/docs/services) via [`vercel.json`](vercel.json): one public service, `web` (Next.js, `web/`), serving every path. The pipeline is **not** a Vercel service. It's a batch job that GitHub Actions runs, and it reaches the site only through the public `/api/revalidate` endpoint, so no service bindings are needed.
+
+1. Vercel → *Add New Project* → import `troyboy95/beep-tracker`. Leave **Root Directory** as the repo root (`vercel.json` lives there and points the `web` service at `web/`).
 2. Add these environment variables: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` and `REVALIDATE_SECRET`.
 3. Deploy. Then, in GitHub Actions settings, set the variable `REVALIDATE_URL=https://<app>.vercel.app/api/revalidate` and the secret `REVALIDATE_SECRET` (same value as in Vercel).
 

@@ -74,3 +74,13 @@ Added a `--tag-only` drain mode. Verified on the real 503 backlog: queue 45 → 
 - Checked the revalidate endpoint auth (401/401/200/405).
 - CI gains a web lint + typecheck job.
 - Vercel deploy steps documented for the user.
+
+### Prompt 9
+> Configure this repository to deploy on Vercel as a project with multiple services. *(Vercel-suggested `vercel.json` with `pipeline` (python) + `web` (nextjs) services and a catch-all rewrite; asked to add bindings, update code to use them, and confirm service names, public paths and bindings.)*
+
+**Outcome:** Checked against the Vercel Services docs. Recommended against making `pipeline` a service: it's a batch CLI with no HTTP entrypoint, run by GitHub Actions within duration limits Hobby can't meet. Found no Vercel-internal service calls, so no bindings and no code changes. Wrote `vercel.json` with a single public `web` service and asked the user to confirm.
+
+### Prompt 10
+> Looks alright, proceed with no bindings
+
+**Outcome:** Finalized `vercel.json` (one public `web` service). Updated the README deploy steps (project root = repo root, not `web`), CHANGELOG and plan.

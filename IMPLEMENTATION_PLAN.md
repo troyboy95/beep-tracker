@@ -120,7 +120,8 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [x] "Updated …" stamp, empty / out-of-range / error states, skeleton, responsive (verified at 400px and 1440px, light and dark)
 - [x] Monochrome design per `plans/frontend-ref.jpg`: Albert Sans + Source Serif 4, true black/white, grey band
 - [x] CI: web lint + typecheck
-- [ ] Deploy to Vercel (root dir `web`, 3 env vars) *(user)*
+- [x] `vercel.json` (Services: one public `web` service; pipeline stays on GitHub Actions; no bindings)
+- [ ] Deploy to Vercel (project root = repo root, 3 env vars) *(user)*
 - [ ] Set GitHub `REVALIDATE_URL` variable + `REVALIDATE_SECRET` secret, then verify that a pipeline run revalidates the live site
 
 ### Phase 4 — Hardening & docs
