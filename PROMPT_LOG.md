@@ -37,3 +37,14 @@ Verbatim log of prompts given to the AI assistant (Claude Code) during developme
 > go with A, continue phase 0
 
 **Outcome:** Chose Option A (no ORM; `supabase-js` + generated types in web). Finished the Phase 0 scaffold: `beep.doctor` credential/connectivity checker, config tests, README, `.gitignore` update. Venv install, `ruff` and `pytest` (2 passed) all succeed. `doctor` correctly reports missing creds. Updated the checklist and changelog. Sent the user the list of required credentials.
+
+### Prompt 6
+> For free tier backup, add a retry for Gemini API due to rate limit issue. More like a queueing mechanism, to remeber which are still pending when it runs on deploy. Furthermore, why id cols across tables is int8 type? I understand ots easier for lookup, and no uuid is reqd at this stage of the project
+
+**Outcome:** Built a durable tagging queue in Postgres (migration 003: `tag_status`/`tag_attempts`/`next_tag_at`/`last_tag_error`) and a worker (`beep/tag_queue.py`):
+- honors 429 `retryDelay`
+- stops when the daily quota is exhausted
+- circuit breaker after 4 consecutive failing batches
+- backoff for failed items; parks an item as `failed` after 3 bad outputs; transient errors never count as failures
+
+Added a `--tag-only` drain mode. Verified on the real 503 backlog: queue 45 → 0, public listings 242 → 277. Explained the `bigint` PK choice (int4 would suffice; bigint is cheap insurance against an FK/array type migration; UUIDs unnecessary) and logged it in the CHANGELOG. Measured cost: $0.178 per 1,000 posts.

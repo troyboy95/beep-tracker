@@ -93,19 +93,21 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [ ] `beep.doctor` all green *(after creds)*
 
 ### Phase 1 — Pipeline
-- [ ] `RawPost` model + source adapter interface
-- [ ] Adapters: Greenhouse, Lever, Ashby, SmartRecruiters (curated company list with India hiring), Adzuna India
-- [ ] Normalize + India filter + fresher pre-filter
-- [ ] Dedup (exact + cross-source key)
-- [ ] Gemini tagger: batching, JSON schema, Pydantic validation, retry/fallback, token accounting
-- [ ] LLM ledger: `llm_calls` write on every call (success/failure/retry), `prompt_version` + hash, `jobs.tag_call_id` link
-- [ ] Ledger CLI: `python -m pipeline.ledger --run <id>` / `--job <id>` prints the exact input and output behind a tag
-- [ ] DB upsert, soft-expire, `ingest_runs` logging
-- [ ] Local dry run → **≥200 active fresher posts in India** in DB
-- [ ] Unit tests: normalize, filters, dedup key, tagger response parsing (mocked LLM)
+- [x] `RawPost` model + source adapter interface (with title pre-check hook)
+- [x] Adapters: Greenhouse, Lever, Ashby, SmartRecruiters; 68 boards verified by `scripts/probe_boards.py` (Adzuna dropped)
+- [x] Normalize + India filter + 0–2 yrs eligibility pre-filter (title + description)
+- [x] Dedup: exact `(source, external_id)` + `dedup_key` view
+- [x] Gemini tagger: batching, JSON schema, Pydantic validation, bounded retries + deferred pass, token accounting, prompt v2
+- [x] LLM ledger: `llm_calls` write on every call (success/failure/retry), `prompt_version` + hash, `jobs.tag_call_id` link
+- [x] Ledger CLI: `python -m beep.ledger --run/--job/--call/--cost`
+- [x] DB upsert, per-board soft-expire, `ingest_runs` logging, versioned migrations (`beep.migrate`)
+- [x] Full run → **≥200 active fresher posts in India** in `public_jobs` (277 on 2026-11-18)
+- [x] Durable tagging queue (pending/done/failed, backoff, 429 `retryDelay`, daily-quota stop, circuit breaker) + `--tag-only` drain mode
+- [x] Unit tests: normalize, filters, dedup key, tagger response parsing (32 passing)
 
 ### Phase 2 — Automation
 - [ ] `daily-refresh.yml`: cron (daily, IST-friendly), `workflow_dispatch` for manual runs, secrets, concurrency guard, timeout
+- [ ] `tag-drain.yml`: `python -m beep.run --tag-only` every ~4 h (same concurrency group, so it never overlaps the daily run)
 - [ ] Failure notification (GH Actions email default) and non-zero exit if total fetched = 0
 - [ ] Trigger Vercel on-demand revalidation at the end of the run
 - [ ] `ci.yml`: lint + tests on PR

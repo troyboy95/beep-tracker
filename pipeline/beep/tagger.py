@@ -140,6 +140,8 @@ class CallResult:
     cost_usd: float = 0.0
     error: str | None = None
     retryable: bool = False
+    retry_after_s: float | None = None  # server-suggested wait (429 RetryInfo)
+    quota_exhausted: bool = False  # daily quota hit: stop calling until it resets
 
     @property
     def parsed_ok(self) -> bool:
@@ -188,6 +190,8 @@ class Tagger:
             res.latency_ms = int((time.monotonic() - t0) * 1000)
             res.error = f"APIError {e.code}: {str(e)[:500]}"
             res.retryable = e.code in (429, 500, 502, 503, 504)
+            if e.code == 429:
+                res.retry_after_s, res.quota_exhausted = parse_rate_limit(e.details)
             return res
         except Exception as e:  # noqa: BLE001 — network etc.; record and move on
             res.latency_ms = int((time.monotonic() - t0) * 1000)
@@ -207,6 +211,26 @@ class Tagger:
         res.response_raw = resp.text
         _parse_into(res, {p.id for p in posts})
         return res
+
+
+def parse_rate_limit(details) -> tuple[float | None, bool]:
+    """Extract (retryDelay seconds, is_daily_quota) from a Google RPC 429 error body."""
+    try:
+        items = (details or {}).get("error", {}).get("details", []) or []
+    except AttributeError:
+        return None, False
+    retry_after, daily = None, False
+    for d in items:
+        kind = d.get("@type", "")
+        if kind.endswith("RetryInfo"):
+            delay = str(d.get("retryDelay", "")).rstrip("s")
+            if delay.replace(".", "", 1).isdigit():
+                retry_after = float(delay)
+        elif kind.endswith("QuotaFailure"):
+            daily = any(
+                "PerDay" in (v.get("quotaId") or "") for v in d.get("violations", []) or []
+            )
+    return retry_after, daily
 
 
 def _parse_into(res: CallResult, expected_ids: set[int]) -> None:

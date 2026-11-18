@@ -17,9 +17,10 @@ def connect(url: str) -> psycopg.Connection:
 # ------------------------------------------------------------------ runs
 
 
-def start_run(conn: psycopg.Connection, trigger: str) -> tuple[int, datetime]:
+def start_run(conn: psycopg.Connection, trigger: str, mode: str = "full") -> tuple[int, datetime]:
     row = conn.execute(
-        "insert into ingest_runs (trigger) values (%s) returning id, started_at", (trigger,)
+        "insert into ingest_runs (trigger, mode) values (%s, %s) returning id, started_at",
+        (trigger, mode),
     ).fetchone()
     return row[0], row[1]
 
@@ -32,6 +33,7 @@ def finish_run(conn: psycopg.Connection, run_id: int, status: str, stats: dict,
           finished_at = now(), status = %(status)s,
           fetched = %(fetched)s, new_posts = %(new)s, updated_posts = %(updated)s,
           expired_posts = %(expired)s, tagged = %(tagged)s, errors = %(errors)s,
+          tag_queue_pending = %(queue)s,
           input_tokens  = coalesce(l.inp, 0),
           output_tokens = coalesce(l.outp, 0),
           est_cost_usd  = coalesce(l.cost, 0)
@@ -69,8 +71,14 @@ on conflict (source, external_id) do update set
   title = excluded.title, company = excluded.company, location_raw = excluded.location_raw,
   description = excluded.description, hints = excluded.hints, dedup_key = excluded.dedup_key,
   min_years_hint = excluded.min_years_hint, prefilter_reason = excluded.prefilter_reason,
-  -- changed content -> clear tags so the post is re-tagged
+  -- changed content -> clear tags and put the post back on the tagging queue
   tagged_at = case when jobs.content_hash = excluded.content_hash then jobs.tagged_at end,
+  tag_status = case when jobs.content_hash = excluded.content_hash
+                    then jobs.tag_status else 'pending' end,
+  tag_attempts = case when jobs.content_hash = excluded.content_hash
+                      then jobs.tag_attempts else 0 end,
+  next_tag_at = case when jobs.content_hash = excluded.content_hash
+                     then jobs.next_tag_at end,
   content_hash = excluded.content_hash
 """
 
@@ -106,15 +114,31 @@ def expire_unseen(conn: psycopg.Connection, run_started: datetime,
     return cur.rowcount
 
 
+# ------------------------------------------------------------------ tagging queue
+
+
+def requeue_stale_prompt(conn: psycopg.Connection) -> int:
+    """Posts tagged with an older prompt version go back on the queue."""
+    return conn.execute(
+        """
+        update jobs set tag_status = 'pending', tag_attempts = 0, next_tag_at = null
+        where tag_status = 'done' and tag_prompt_version is distinct from %s
+        """,
+        (PROMPT_VERSION,),
+    ).rowcount
+
+
 def posts_to_tag(conn: psycopg.Connection, limit: int, excerpt_fn) -> list[PostInput]:
+    """Due items from the queue: pending and not backing off. Oldest-deferred first."""
     rows = conn.execute(
         """
         select id, title, company, location_raw, coalesce(hints, ''), min_years_hint, description
         from jobs
-        where is_active and (tagged_at is null or tag_prompt_version is distinct from %s)
-        order by tagged_at nulls first, first_seen_at, id limit %s
+        where is_active and tag_status = 'pending'
+          and (next_tag_at is null or next_tag_at <= now())
+        order by next_tag_at nulls first, first_seen_at, id limit %s
         """,
-        (PROMPT_VERSION, limit),
+        (limit,),
     ).fetchall()
     return [
         PostInput(id=r[0], title=r[1], company=r[2], location=r[3], hints=r[4],
@@ -131,7 +155,8 @@ def apply_tags(conn: psycopg.Connection, tags: list[Tag], call_id: int, model: s
             """
             update jobs set role = %s, city = %s, job_type = %s, is_fresher = %s,
               tag_confidence = %s, tag_model = %s, tag_prompt_version = %s,
-              tag_call_id = %s, tagged_at = now()
+              tag_call_id = %s, tagged_at = now(),
+              tag_status = 'done', next_tag_at = null, last_tag_error = null
             where id = %s
             """,
             [
@@ -140,6 +165,33 @@ def apply_tags(conn: psycopg.Connection, tags: list[Tag], call_id: int, model: s
                 for t in tags
             ],
         )
+
+
+def defer_posts(conn: psycopg.Connection, ids: list[int], error: str, delay_s: float,
+                counts_as_failure: bool, max_attempts: int) -> int:
+    """Push failed items back with a delay. Only non-transient failures (bad model output)
+    count toward `max_attempts`; reaching it parks the item as 'failed' for manual review."""
+    if not ids:
+        return 0
+    return conn.execute(
+        """
+        update jobs set
+          next_tag_at = now() + make_interval(secs => %(delay)s),
+          last_tag_error = left(%(err)s, 500),
+          tag_attempts = tag_attempts + (case when %(count)s then 1 else 0 end),
+          tag_status = case when %(count)s and tag_attempts + 1 >= %(max)s
+                            then 'failed' else tag_status end
+        where id = any(%(ids)s) and tag_status = 'pending'
+        """,
+        {"delay": delay_s, "err": error, "count": counts_as_failure, "max": max_attempts,
+         "ids": ids},
+    ).rowcount
+
+
+def queue_depth(conn: psycopg.Connection) -> int:
+    return conn.execute(
+        "select count(*) from jobs where is_active and tag_status = 'pending'"
+    ).fetchone()[0]
 
 
 # ------------------------------------------------------------------ ledger

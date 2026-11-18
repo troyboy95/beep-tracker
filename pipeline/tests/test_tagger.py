@@ -1,6 +1,23 @@
 import json
 
-from beep.tagger import CallResult, _parse_into
+from beep.tagger import CallResult, _parse_into, parse_rate_limit
+
+
+def test_parse_rate_limit_per_minute():
+    body = {"error": {"code": 429, "details": [
+        {"@type": "type.googleapis.com/google.rpc.QuotaFailure",
+         "violations": [{"quotaId": "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"}]},
+        {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "27s"},
+    ]}}
+    assert parse_rate_limit(body) == (27.0, False)
+
+
+def test_parse_rate_limit_daily_and_garbage():
+    body = {"error": {"details": [{"@type": "x.QuotaFailure", "violations": [
+        {"quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier"}]}]}}
+    assert parse_rate_limit(body) == (None, True)
+    assert parse_rate_limit(None) == (None, False)
+    assert parse_rate_limit("oops") == (None, False)
 
 
 def _res(raw: str) -> CallResult:

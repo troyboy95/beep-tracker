@@ -20,7 +20,7 @@ GitHub Actions (daily cron) ── Python pipeline ──▶ Supabase Postgres �
 | Path | What |
 |---|---|
 | `pipeline/` | Python ingestion pipeline (`beep` package) |
-| `db/schema.sql` | Schema, dedup view, RLS, append-only LLM ledger |
+| `db/migrations/` | Versioned schema: tables, dedup view, RLS, append-only LLM ledger, tag queue |
 | `web/` | Next.js frontend *(Phase 3)* |
 | `SOURCES.md` | Data sources and their terms |
 
@@ -28,15 +28,27 @@ GitHub Actions (daily cron) ── Python pipeline ──▶ Supabase Postgres �
 
 ```bash
 cp .env.example .env               # fill in values (see comments inside)
-# Apply db/schema.sql in the Supabase SQL Editor
 
 cd pipeline
 python -m venv .venv
 .venv/Scripts/activate              # Windows; use `source .venv/bin/activate` on macOS/Linux
 pip install -e ".[dev]"
-python -m beep.doctor               # checks env vars, DB schema, Gemini model, Adzuna key
+python -m beep.migrate              # apply db/migrations/*.sql
+python -m beep.doctor               # checks env vars, DB schema, Gemini model
 pytest
 ```
+
+## Running the pipeline
+
+```bash
+python -m beep.run --dry-run        # fetch + filter only, no DB/LLM
+python -m beep.run                  # full: fetch → filter → upsert → expire → drain tag queue
+python -m beep.run --tag-only       # drain the LLM tagging queue only
+python -m beep.ledger --cost        # cost per 1,000 posts from the LLM ledger
+python -m beep.ledger --job 123     # exact LLM input/output behind a post's tags
+```
+
+Tagging is a durable queue in Postgres (`jobs.tag_status`). Rate limits or provider outages only delay tags and never lose them: failed items back off and are picked up by the next run.
 
 ## Cost
 
