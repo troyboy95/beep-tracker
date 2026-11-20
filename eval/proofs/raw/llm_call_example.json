@@ -1,0 +1,299 @@
+{
+ "id": 7,
+ "run_id": 2,
+ "created_at": "2026-11-18 16:01:23.947667+00:00",
+ "model": "gemini-3.1-flash-lite",
+ "prompt_version": "v2",
+ "prompt_hash": "335b01b1a22a1e74f88f0a21e0c6cd8d2af11207a725cef4390eb8c9440e1fc9",
+ "job_ids": [
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  61
+ ],
+ "request": {
+  "posts": [
+   {
+    "id": 47,
+    "hints": "",
+    "title": "Datapath Engineer, Portworx",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … From redesigning our customers’ experience with our Modern Data platforms and services, to evolving our own internal tools and ways of working, we are taking deliberate steps to invest and innovate in critical areas to delight our customers and outdistance our competitors. … We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Pure’s policies, unless you are on PTO, or work travel, or other approved leave. … 8+ years strong expertise in using C++, Java, Go or related programming languages … Experience in any number of related systems software projects e.g: Distributed systems, Operating systems, Linux Kernel, file systems, Database internals, Hypervisors, Containers, Compiler Optimization, etc.; … A BS degree in Computer Science; advanced degrees are a bonus! … Must be willing and able to work in an open office environment",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 48,
+    "hints": "",
+    "title": "GTM Integration Developer - Boomi",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … Office Alignment: We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Everpure’s policies, unless you are on PTO, or work travel, or other approved leave . … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 49,
+    "hints": "",
+    "title": "MTS-Exa",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … Resolve Complex System Engineering Challenges: Apply deep root-cause analysis and system-level insight to solve multi-threaded, high-concurrency performance and reliability issues across Linux platform internals. … Location: We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Pure’s policies, unless you are on PTO, or work travel, or other approved leave. … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 50,
+    "hints": "",
+    "title": "MTS-Exa",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … Resolve Complex System Engineering Challenges: Apply deep root-cause analysis and system-level insight to solve multi-threaded, high-concurrency performance and reliability issues across Linux platform internals. … Location: We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Pure’s policies, unless you are on PTO, or work travel, or other approved leave. … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 51,
+    "hints": "",
+    "title": "MTS - Performance Engineering",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … To be a expert performance engineer to define and validate the industry-leading performance of our mission-critical FlashArray portfolio. … You will be instrumental in extending our capabilities into the cloud, directly impacting customer adoption and satisfaction by ensuring our products meet the highest benchmarks. … Deep System-Level Performance Expertise: Proven experience in designing and executing system-level performance testing for enterprise-grade solutions, including servers, storage (SAN protocols like iSCSI, NFS, SMB), and databases. … We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Pure’s policies, unless you are on PTO, or work travel, or other approved leave. … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 52,
+    "hints": "",
+    "title": "MTS - Performance Engineering",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … To be a expert performance engineer to define and validate the industry-leading performance of our mission-critical FlashArray portfolio. … You will be instrumental in extending our capabilities into the cloud, directly impacting customer adoption and satisfaction by ensuring our products meet the highest benchmarks. … Deep System-Level Performance Expertise: Proven experience in designing and executing system-level performance testing for enterprise-grade solutions, including servers, storage (SAN protocols like iSCSI, NFS, SMB), and databases. … We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Pure’s policies, unless you are on PTO, or work travel, or other approved leave. … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 53,
+    "hints": "",
+    "title": "MTS - VIFA",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … Full-Lifecycle Development: A strong commitment to quality, evidenced by your experience owning both the development of complex features and the creation of comprehensive test automation frameworks. … Location Requirement: We are primarily an in-office environment and therefore, you will be expected to work from the {{OFFICE_LOCATION}} office in compliance with Pure’s policies, unless you are on PTO, or work travel, or other approved leave. … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 54,
+    "hints": "",
+    "title": "Recruiting Coordinator (12 months contract)",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … Beyond managing day-to-day coordination, the ideal candidate will operate with a high degree of judgment and nuance, leading complex scheduling logistics, and partnering cross-functionally to optimize our operations. … The ideal candidate will have excellent communication skills, be proficient in managing multiple tasks simultaneously, and demonstrate a strong ability to collaborate across diverse internal and external networks. … Own and manage complex interview scheduling process, acting as the central point of coordination for standard, high-volume, and executive-level loops, including multi-location and international panels. … Drive process optimization by partnering with Recruiting Ops, HR, and IT to identify process gaps and implement scalable improvements that enhance the candidate experience. … 3+ years of recruiting coordination, executive administration, or related fast-paced operations experience.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 55,
+    "hints": "",
+    "title": "ServiceNow Platform Support",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … Workplace Presence: We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Everpure’s policies, unless you are on PTO, or work travel, or other approved leave . … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 56,
+    "hints": "",
+    "title": "ServiceNow Platform Support",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … Workplace Presence: We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Everpure’s policies, unless you are on PTO, or work travel, or other approved leave . … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 57,
+    "hints": "",
+    "title": "Technical Services Engineer Representative",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … You will be expected to live these values every day while collaborating closely with peers across Support, Engineering, and the field. … Create and maintain knowledge base (KB) articles and FAQs for both internal and customer facing use. … Act as a customer advocate by driving issues internally and representing the company externally. … Work primarily from the Bangalore office in alignment with company policies, unless on approved leave, travel, or remote exceptions. … Hands on experience in customer facing roles and/or technical support environments. … Bachelor’s degree in Computer Science or a related technical field. … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 58,
+    "hints": "",
+    "title": "Workday Analyst",
+    "company": "Pure Storage",
+    "excerpt": "Everpure (NYSE: P) has evolved from storage pioneer to data platform, closing fiscal 2026 with $3.7 billion in revenue, its first billion-dollar quarter, and accelerating growth into FY27. Our strategic agenda spans the companies defining the next era of technology - hyperscalers, AI labs, the AI hardware supply chain, data platform providers, and the broader AI ecosystem.\nThis type of work—work that changes the world—is what the tech industry wa … You will spearhead system configurations and architectural solutions across Workday Core HCM and Time & Absence, translating complex international business rules into seamless, automated workflows. … In this high-impact position, your ownership directly elevates our employee experience and ensures scalable execution across our expanding global workforce. … Location Expectation: We are primarily an in-office environment and therefore, you will be expected to work from the Bangalore office in compliance with Everpure’s policies, unless you are on PTO, or work travel, or other approved leave. … Innovation : We celebrate those who think critically, like a challenge, and aspire to be trailblazers. … Everpure is proud to be an equal opportunity employer.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 59,
+    "hints": "",
+    "title": "Support Specialist, R1",
+    "company": "Airbnb",
+    "excerpt": "Airbnb was born in 2007 when two hosts welcomed three guests to their San Francisco home, and has since grown to over 5 million hosts who have welcomed over 2 billion guest arrivals in almost every country across the globe. Every day, hosts offer unique stays and experiences that make it possible for guests to connect with communities in a more authentic way. \n The Community You Will Join: \nAs a member of the Airbnb Customer Support team, you'll  … Be a first point of contact to handle and resolve customer complaints … Be ambassadors embodying knowledge, empathy, and accountability … Job location: Gurgaon … Graduate with minimum 2 years of international voice process experience in a contact center/BPO … Knowledge of and experience with measuring and improving customer satisfaction and loyalty across broad functional areas and diverse geographies … Knowledge of functional key performance metrics related to customer experience … Internet: Minimum 10 Mbps high-speed internet on the laptop for seamless work and virtual meetings. … Cameras must be on during meetings unless otherwise stated. … Approved locations: … Hiring/Training and Nesting in the Airbnb Office; satisfactory performance is required for work from home post the initial training and nesting period. … Work from designated home office setups in Delhi/Gurgaon only",
+    "location": "Gurugram, India",
+    "min_years_hint": 2
+   },
+   {
+    "id": 60,
+    "hints": "",
+    "title": "Benefits Analyst",
+    "company": "GitLab",
+    "excerpt": "GitLab is the intelligent orchestration platform for DevSecOps. GitLab enables organizations to increase developer productivity, improve operational efficiency, reduce security and compliance risk, and accelerate digital transformation. More than 50 million registered users and more than 50% of the Fortune 100* trust GitLab to ship better, more secure software faster.\nThe same principles built into our products are reflected in how our team works … You'll need to be based in Bangalore, with periodic office presence for hosting and managing benefits events, and flexibility to collaborate across time zones, including Pacific time. … Protect accuracy and team-member experience, communicate progress and risks, and seek guidance on prioritizing improvements. … Experience supporting benefits administration, including enrollment, reporting, and audits, and working with benefits brokers or vendors. … Experience supporting benefits in more than one country is required; global technology company experience is preferred. … Strategic benefits plan design experience isn't required. … Experience using a human resources information system (HRIS), benefits administration platform, or similar operational tools, with attention to detail in data entry, testing, reconciliation, and quality assurance. … Workday experience is preferred.",
+    "location": "Bangalore, India",
+    "min_years_hint": null
+   },
+   {
+    "id": 61,
+    "hints": "",
+    "title": "Customer Success Engineer, India",
+    "company": "GitLab",
+    "excerpt": "GitLab is the intelligent orchestration platform for DevSecOps. GitLab enables organizations to increase developer productivity, improve operational efficiency, reduce security and compliance risk, and accelerate digital transformation. More than 50 million registered users and more than 50% of the Fortune 100* trust GitLab to ship better, more secure software faster.\nThe same principles built into our products are reflected in how our team works … This role is a strong fit for someone who enjoys solving complex technical problems, communicates clearly, and thrives in a remote, asynchronous environment. … Contribute to scalable enablement by improving documentation, sharing knowledge through internal and external channels (for example, tutorials or technical content), and mentoring team members and customers to build technical competency and adoption. … Experience providing technical consultancy and solution guidance through video calls and written channels, helping users or customers adopt technical solutions successfully. … Hands-on technical background in software development, systems engineering, or similar technical environments, or equivalent practical experience. … Ability to manage multiple priorities in a remote, asynchronous environment while communicating status, risks, and next steps clearly. … Must be based in India, with full working rights in India",
+    "location": "Remote, India",
+    "min_years_hint": null
+   }
+  ],
+  "prompt_version": "v2"
+ },
+ "response_raw": "{\n  \"items\": [\n    {\n      \"id\": 47,\n      \"role\": \"Software Engineering\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": false,\n      \"confidence\": 0.9\n    },\n    {\n      \"id\": 48,\n      \"role\": \"Software Engineering\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 49,\n      \"role\": \"Software Engineering\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 50,\n      \"role\": \"Software Engineering\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 51,\n      \"role\": \"QA & Testing\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 52,\n      \"role\": \"QA & Testing\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 53,\n      \"role\": \"Software Engineering\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 54,\n      \"role\": \"HR & Recruiting\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"other\",\n      \"is_fresher\": false,\n      \"confidence\": 0.9\n    },\n    {\n      \"id\": 55,\n      \"role\": \"DevOps, Cloud & IT\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 56,\n      \"role\": \"DevOps, Cloud & IT\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 57,\n      \"role\": \"Customer Support & Success\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.9\n    },\n    {\n      \"id\": 58,\n      \"role\": \"Operations & Supply Chain\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.8\n    },\n    {\n      \"id\": 59,\n      \"role\": \"Customer Support & Success\",\n      \"city\": \"Delhi NCR\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.9\n    },\n    {\n      \"id\": 60,\n      \"role\": \"HR & Recruiting\",\n      \"city\": \"Bengaluru\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.9\n    },\n    {\n      \"id\": 61,\n      \"role\": \"Customer Support & Success\",\n      \"city\": \"Remote (India)\",\n      \"job_type\": \"full_time\",\n      \"is_fresher\": true,\n      \"confidence\": 0.9\n    }\n  ]\n}",
+ "parsed_ok": true,
+ "validation_errors": null,
+ "input_tokens": 4755,
+ "output_tokens": 991,
+ "latency_ms": 3328,
+ "cost_usd": "0.00267525",
+ "attempt": 1,
+ "retry_of": null,
+ "error": null,
+ "response": {
+  "items": [
+   {
+    "id": 47,
+    "role": "Software Engineering",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": false,
+    "confidence": 0.9
+   },
+   {
+    "id": 48,
+    "role": "Software Engineering",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 49,
+    "role": "Software Engineering",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 50,
+    "role": "Software Engineering",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 51,
+    "role": "QA & Testing",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 52,
+    "role": "QA & Testing",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 53,
+    "role": "Software Engineering",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 54,
+    "role": "HR & Recruiting",
+    "city": "Bengaluru",
+    "job_type": "other",
+    "is_fresher": false,
+    "confidence": 0.9
+   },
+   {
+    "id": 55,
+    "role": "DevOps, Cloud & IT",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 56,
+    "role": "DevOps, Cloud & IT",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 57,
+    "role": "Customer Support & Success",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.9
+   },
+   {
+    "id": 58,
+    "role": "Operations & Supply Chain",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.8
+   },
+   {
+    "id": 59,
+    "role": "Customer Support & Success",
+    "city": "Delhi NCR",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.9
+   },
+   {
+    "id": 60,
+    "role": "HR & Recruiting",
+    "city": "Bengaluru",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.9
+   },
+   {
+    "id": 61,
+    "role": "Customer Support & Success",
+    "city": "Remote (India)",
+    "job_type": "full_time",
+    "is_fresher": true,
+    "confidence": 0.9
+   }
+  ]
+ }
+}

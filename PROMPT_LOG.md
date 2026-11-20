@@ -4,8 +4,6 @@ Verbatim log of prompts given to the AI assistant (Claude Code) during developme
 
 ---
 
-## Session fb377eb2 — 2026-11-17 (device: LAPTOP-CUUHKO8Q)
-
 ### Prompt 1
 > File has the task that we have to accomplish. Ignore point 3 (for execution purpose, but consider for planning). Here's what I've planned for its implementation:
 > Frontend - We'll use next.js, deploy on vercel
@@ -94,3 +92,4 @@ Added a `--tag-only` drain mode. Verified on the real 503 backlog: queue 45 → 
 > update readme, with cost
 
 **Outcome:** Rewrote `README.md`: live URL, at-a-glance table (sources, volume, accuracy, cost), how it works, authentication table. The cost section was pulled fresh from the ledger and run history: $0.170 per 1,000 posts tagging-only / $0.180 all-in, ~281/67 tokens per post, $0.089 total to date, steady state ≈ $0.11/month at paid prices. Infra is $0 on free tiers (Supabase 20 MB of 500 MB). Kept the user's removal of the task section; removed stale notes; documented the web CI job.
+

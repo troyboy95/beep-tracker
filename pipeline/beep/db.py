@@ -170,23 +170,32 @@ def apply_tags(conn: psycopg.Connection, tags: list[Tag], call_id: int, model: s
         )
 
 
-def apply_city_rules(conn: psycopg.Connection, resolve) -> int:
-    """Re-apply the deterministic city rule to already-tagged posts (no LLM calls).
-    Idempotent; lets a rule change fix existing data on the next run."""
+def apply_city_rules(conn: psycopg.Connection, resolve) -> tuple[int, int]:
+    """Re-apply the deterministic city rule to already-tagged posts. Idempotent, so a rule
+    change fixes existing data on the next run. Returns (cities set by the rule, posts re-queued).
+
+    A post whose city came from an older rule that no longer fires (e.g. a multi-location post
+    the rule used to collapse to one city) goes back on the queue so the LLM tags it again."""
     rows = conn.execute(
-        "select id, location_raw, city from jobs where tag_status = 'done'"
+        "select id, location_raw, city, city_source from jobs where tag_status = 'done'"
     ).fetchall()
-    fixes = [
-        (rule.value, jid)
-        for jid, loc, city in rows
-        if (rule := resolve(loc)) is not None and rule.value != city
-    ]
-    if fixes:
+    fixes, requeue = [], []
+    for jid, loc, city, source in rows:
+        rule = resolve(loc)
+        if rule is not None and rule.value != city:
+            fixes.append((rule.value, jid))
+        elif rule is None and source == "rule":
+            requeue.append(jid)
+    if fixes or requeue:
         with conn.transaction(), conn.cursor() as cur:
-            cur.executemany(
-                "update jobs set city = %s, city_source = 'rule' where id = %s", fixes
-            )
-    return len(fixes)
+            cur.executemany("update jobs set city = %s, city_source = 'rule' where id = %s", fixes)
+            if requeue:
+                cur.execute(
+                    "update jobs set tag_status = 'pending', tag_attempts = 0, next_tag_at = null"
+                    " where id = any(%s)",
+                    (requeue,),
+                )
+    return len(fixes), len(requeue)
 
 
 def defer_posts(conn: psycopg.Connection, ids: list[int], error: str, delay_s: float,

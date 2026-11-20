@@ -40,11 +40,46 @@ _PATTERN = re.compile(
 )
 
 
-def resolve_city(location_raw: str | None) -> City | None:
-    """The single listed city named in `location_raw`, or None if zero or several.
+# Location segments that are not places of their own: country, work mode, Indian states/UTs
+# (names and the two-letter codes ATS boards use).
+_NOT_A_PLACE = {
+    "india", "ind", "in", "remote", "hybrid", "onsite", "on site", "anywhere",
+    # (Delhi, Chandigarh and Goa are deliberately absent: they are also listed cities.)
+    "andhra pradesh", "arunachal pradesh", "assam", "bihar", "chhattisgarh", "gujarat",
+    "haryana", "himachal pradesh", "jharkhand", "karnataka", "kerala", "madhya pradesh",
+    "maharashtra", "manipur", "meghalaya", "mizoram", "nagaland", "odisha", "punjab",
+    "rajasthan", "sikkim", "tamil nadu", "telangana", "tripura", "uttar pradesh", "uttarakhand",
+    "uttrakhand", "west bengal", "puducherry", "jammu and kashmir",
+    "ladakh", "ncr", "up east", "up west",
+    "ap", "ar", "as", "br", "cg", "ga", "gj", "hr", "hp", "jh", "ka", "kl", "mp", "mh", "mn",
+    "ml", "mz", "nl", "od", "or", "pb", "rj", "sk", "tn", "ts", "tg", "tr", "up", "uk", "wb",
+    "dl", "ch", "py", "jk", "la",
+}
+_SEGMENT_SPLIT = re.compile(r"[|;/\n]")
 
-    A "Remote" marker next to one city keeps the city: such posts are tied to that city's
-    office or territory (e.g. AbbVie "Mumbai | MH | Remote | India").
+
+def _norm(segment: str) -> str:
+    return re.sub(r"[^a-z ]+", " ", segment.lower()).strip()
+
+
+def resolve_city(location_raw: str | None) -> City | None:
+    """The listed city `location_raw` names, or None when it is ambiguous.
+
+    Fires only when EVERY place in the string maps to the same listed city. Segments are split
+    on | ; / and newlines; within a segment the first comma part is the place ("Pune, Maharashtra"
+    → Pune). Country, state names/codes and work-mode words ("Remote") are ignored, so
+    "Mumbai | MH | Remote | India" → Mumbai and "Gurugram | Noida" → Delhi NCR.
+    Any place NOT on the list ("Bangalore; Mohali", or 12 towns that include Faridabad) → None:
+    the post is multi-city or unlisted, and the LLM decides.
     """
-    found = {ALIASES[m.group(1).lower()] for m in _PATTERN.finditer(location_raw or "")}
+    found: set[City] = set()
+    for segment in _SEGMENT_SPLIT.split(location_raw or ""):
+        for part in segment.split(",")[:1] or [segment]:
+            place = _norm(part)
+            if not place or place in _NOT_A_PLACE:
+                continue
+            hits = {ALIASES[m.group(1).lower()] for m in _PATTERN.finditer(place)}
+            if len(hits) != 1:
+                return None  # an unlisted place, or two cities in one segment
+            found |= hits
     return found.pop() if len(found) == 1 else None

@@ -28,3 +28,6 @@ Thumbs.db
 .idea/
 
 /plans
+
+# One-off upload bundles (e.g. Notion import)
+*_notion.zip

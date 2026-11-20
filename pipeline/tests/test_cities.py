@@ -22,6 +22,16 @@ from beep.tagger import City, PostInput, Tag
         ("Mysore", City.MYSURU),
         # city + remote marker keeps the city (territory/office-bound)
         ("Mumbai | MH | Remote | India", City.MUMBAI),
+        ("Gurugram, Haryana | Noida, Uttar Pradesh | India", City.DELHI_NCR),
+        ("Kochi | KL | India", City.KOCHI),
+        ("Delhi", City.DELHI_NCR),
+        ("Goa | India", City.GOA),
+        ("Pune, Maharashtra | India", City.PUNE),
+        ("Bengaluru-VTP, India", City.BENGALURU),
+        ("IN-Bengaluru", City.BENGALURU),
+        # found while collecting proof: one listed city among unlisted places is multi-city
+        ("Bangalore, IND; Bangalore, IND; Mohali, IND", None),
+        ("Sonipat, Haryana | Hisar, Haryana | Faridabad, Haryana | India", None),
         # ambiguous / unlisted / none -> leave it to the LLM
         ("Bengaluru | Pune | India", None),
         ("Aligarh, Uttar Pradesh | India", None),

@@ -90,9 +90,9 @@ def drain(conn, settings, run_id: int) -> int:
     requeued = db.requeue_stale_prompt(conn)
     if requeued:
         log.info("re-queued %d posts tagged with an older prompt version", requeued)
-    fixed = db.apply_city_rules(conn, resolve_city)
-    if fixed:
-        log.info("city rule corrected %d already-tagged posts", fixed)
+    fixed, requeued_city = db.apply_city_rules(conn, resolve_city)
+    if fixed or requeued_city:
+        log.info("city rule: corrected %d posts, re-queued %d for the LLM", fixed, requeued_city)
 
     due = db.posts_to_tag(conn, settings.max_tag_per_run, llm_excerpt)
     log.info("queue: %d due now (depth %d), batches of %d",

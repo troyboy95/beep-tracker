@@ -1,0 +1,431 @@
+{
+ "collected_at": "2026-11-20T16:55:04+00:00",
+ "f1": {
+  "rule_rows": 35,
+  "corrected_vs_llm": 35,
+  "transitions": [
+   [
+    "Other (India) -> Pune",
+    14
+   ],
+   [
+    "Other (India) -> Coimbatore",
+    6
+   ],
+   [
+    "Other (India) -> Vadodara",
+    4
+   ],
+   [
+    "Multiple cities -> Delhi NCR",
+    2
+   ],
+   [
+    "Other (India) -> Kochi",
+    2
+   ],
+   [
+    "Remote (India) -> Mumbai",
+    2
+   ],
+   [
+    "Other (India) -> Lucknow",
+    1
+   ],
+   [
+    "Other (India) -> Mysuru",
+    1
+   ],
+   [
+    "Multiple cities -> Bengaluru",
+    1
+   ],
+   [
+    "Multiple cities -> Hyderabad",
+    1
+   ],
+   [
+    "Other (India) -> Jaipur",
+    1
+   ]
+  ],
+  "by_source": [
+   [
+    "smartrecruiters",
+    28
+   ],
+   [
+    "lever",
+    4
+   ],
+   [
+    "greenhouse",
+    3
+   ]
+  ],
+  "examples": [
+   {
+    "id": 220,
+    "source": "lever",
+    "title": "Team Leader- LRM- Sonipat",
+    "location_raw": "Sonipat, Haryana | Hisar, Haryana | Rohtak, Haryana | Mathura, Uttar Pradesh | Panipat, Haryana | Prayagraj, Uttar Pradesh | Kanpur, Uttar Pradesh | Varanasi, Uttar Pradesh | Haldwani, Uttrakhand | Roorkee, Uttarakhand | Faridabad, Haryana | Bulandshahar, Uttar Pradesh | India",
+    "llm_city": "Multiple cities",
+    "final_city": "Delhi NCR",
+    "ledger_call": 61
+   },
+   {
+    "id": 101,
+    "source": "greenhouse",
+    "title": "Analyst",
+    "location_raw": "Lucknow",
+    "llm_city": "Other (India)",
+    "final_city": "Lucknow",
+    "ledger_call": 18
+   },
+   {
+    "id": 140,
+    "source": "lever",
+    "title": "Security and Automation Engineer",
+    "location_raw": "Pune, Maharashtra | India",
+    "llm_city": "Other (India)",
+    "final_city": "Pune",
+    "ledger_call": 23
+   },
+   {
+    "id": 253,
+    "source": "smartrecruiters",
+    "title": "Applicant - Mortgage",
+    "location_raw": "Kochi | KL | India",
+    "llm_city": "Other (India)",
+    "final_city": "Kochi",
+    "ledger_call": 33
+   },
+   {
+    "id": 260,
+    "source": "smartrecruiters",
+    "title": "R&D Engineer (C++)",
+    "location_raw": "Pune | MH | India",
+    "llm_city": "Other (India)",
+    "final_city": "Pune",
+    "ledger_call": 34
+   },
+   {
+    "id": 266,
+    "source": "smartrecruiters",
+    "title": "Order Management Specialist",
+    "location_raw": "Pune | MH | India",
+    "llm_city": "Other (India)",
+    "final_city": "Pune",
+    "ledger_call": 34
+   },
+   {
+    "id": 356,
+    "source": "smartrecruiters",
+    "title": "ECT2_Test Automation for Mobile APP_COB",
+    "location_raw": "Coimbatore | India",
+    "llm_city": "Other (India)",
+    "final_city": "Coimbatore",
+    "ledger_call": 44
+   },
+   {
+    "id": 284,
+    "source": "smartrecruiters",
+    "title": "Software Engineer (python,Django,Pandas/ Polars)",
+    "location_raw": "Pune | MH | India",
+    "llm_city": "Other (India)",
+    "final_city": "Pune",
+    "ledger_call": 60
+   }
+  ],
+  "other_india_now": 19,
+  "other_india_now_naming_listed_city": 0,
+  "city_source_split": [
+   [
+    "llm",
+    451
+   ],
+   [
+    "rule",
+    35
+   ]
+  ]
+ },
+ "f2": {
+  "calls": 66,
+  "failed": 29,
+  "by_class": [
+   [
+    "ok",
+    37
+   ],
+   [
+    "503",
+    29
+   ]
+  ],
+  "per_run": {
+   "1": {
+    "ok": 2
+   },
+   "2": {
+    "503": 28,
+    "ok": 27
+   },
+   "3": {
+    "ok": 3
+   },
+   "4": {
+    "ok": 1
+   },
+   "6": {
+    "ok": 2
+   },
+   "9": {
+    "ok": 2,
+    "503": 1
+   }
+  },
+  "succeeded_on_retry": 11,
+  "sample_error": {
+   "call": 3,
+   "run": 2,
+   "attempt": 1,
+   "error": "APIError 503: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
+   "at": "2026-11-18T16:00:02.537487+00:00"
+  },
+  "runs": [
+   {
+    "id": 1,
+    "trigger": "local",
+    "mode": "full",
+    "status": "success",
+    "started": "2026-11-18T15:51:03.448549+00:00",
+    "fetched": 4122,
+    "new": 501,
+    "expired": 0,
+    "tagged": 30,
+    "queue_after": null
+   },
+   {
+    "id": 2,
+    "trigger": "local",
+    "mode": "full",
+    "status": "success",
+    "started": "2026-11-18T15:59:47.007249+00:00",
+    "fetched": 4122,
+    "new": 0,
+    "expired": 51,
+    "tagged": 405,
+    "queue_after": null
+   },
+   {
+    "id": 3,
+    "trigger": "local",
+    "mode": "tag_only",
+    "status": "success",
+    "started": "2026-11-18T16:17:05.485051+00:00",
+    "fetched": 0,
+    "new": 0,
+    "expired": 0,
+    "tagged": 45,
+    "queue_after": 0
+   },
+   {
+    "id": 4,
+    "trigger": "manual",
+    "mode": "full",
+    "status": "success",
+    "started": "2026-11-18T17:36:39.079071+00:00",
+    "fetched": 4115,
+    "new": 0,
+    "expired": 0,
+    "tagged": 1,
+    "queue_after": 0
+   },
+   {
+    "id": 5,
+    "trigger": "schedule",
+    "mode": "tag_only",
+    "status": "success",
+    "started": "2026-11-19T00:44:57.796209+00:00",
+    "fetched": 0,
+    "new": 0,
+    "expired": 0,
+    "tagged": 0,
+    "queue_after": 0
+   },
+   {
+    "id": 6,
+    "trigger": "schedule",
+    "mode": "full",
+    "status": "success",
+    "started": "2026-11-19T10:41:51.685138+00:00",
+    "fetched": 4119,
+    "new": 16,
+    "expired": 10,
+    "tagged": 21,
+    "queue_after": 0
+   },
+   {
+    "id": 7,
+    "trigger": "schedule",
+    "mode": "tag_only",
+    "status": "success",
+    "started": "2026-11-19T16:04:38.214562+00:00",
+    "fetched": 0,
+    "new": 0,
+    "expired": 0,
+    "tagged": 0,
+    "queue_after": 0
+   },
+   {
+    "id": 8,
+    "trigger": "schedule",
+    "mode": "tag_only",
+    "status": "success",
+    "started": "2026-11-20T00:55:23.315372+00:00",
+    "fetched": 0,
+    "new": 0,
+    "expired": 0,
+    "tagged": 0,
+    "queue_after": 0
+   },
+   {
+    "id": 9,
+    "trigger": "schedule",
+    "mode": "full",
+    "status": "success",
+    "started": "2026-11-20T10:22:14.261402+00:00",
+    "fetched": 4106,
+    "new": 20,
+    "expired": 23,
+    "tagged": 20,
+    "queue_after": 0
+   },
+   {
+    "id": 10,
+    "trigger": "manual",
+    "mode": "tag_only",
+    "status": "success",
+    "started": "2026-11-20T15:41:43.436232+00:00",
+    "fetched": 0,
+    "new": 0,
+    "expired": 0,
+    "tagged": 0,
+    "queue_after": 0
+   },
+   {
+    "id": 11,
+    "trigger": "schedule",
+    "mode": "tag_only",
+    "status": "success",
+    "started": "2026-11-20T15:45:47.275130+00:00",
+    "fetched": 0,
+    "new": 0,
+    "expired": 0,
+    "tagged": 0,
+    "queue_after": 0
+   }
+  ],
+  "queue_now": [
+   [
+    "done",
+    454
+   ]
+  ]
+ },
+ "f3": {
+  "probe_boards_with_india": 69,
+  "probe_india_posts": 2387,
+  "probe_title_fresher": 46,
+  "prefilter_reason_active": [
+   [
+    "no_signal",
+    258
+   ],
+   [
+    "le2",
+    138
+   ],
+   [
+    "explicit",
+    58
+   ]
+  ],
+  "fresher_split_active": [
+   [
+    false,
+    154
+   ],
+   [
+    true,
+    300
+   ]
+  ],
+  "public_now": 281,
+  "eval_false_positives_before": [
+   {
+    "id": "37",
+    "company": "MongoDB",
+    "title": "Early Talent Recruiter"
+   },
+   {
+    "id": "221",
+    "company": "Paytm",
+    "title": "Team Leader-LRM- Chennai"
+   },
+   {
+    "id": "222",
+    "company": "Paytm",
+    "title": "Team Leader-LRM- Deoria"
+   },
+   {
+    "id": "377",
+    "company": "Bosch",
+    "title": "IN_RBIN_Senior Engineer_Product Development_PS-CC"
+   },
+   {
+    "id": "1985",
+    "company": "Paytm",
+    "title": "Financial Analyst - AM - Lending"
+   }
+  ],
+  "eval_false_positives_after": [
+   {
+    "id": "37",
+    "company": "MongoDB",
+    "title": "Early Talent Recruiter"
+   }
+  ],
+  "senior_title_active": 28,
+  "senior_title_public": 18,
+  "senior_title_examples": [
+   "Program Management (Business product) - DGM - Lending EMI",
+   "Team Leader- LRM- Sonipat",
+   "Team Leader-LRM- Chennai",
+   "Team Leader-LRM- Deoria",
+   "IN_MIVIN_Manager - Purchasing Template _IN",
+   "IN_RBAI_Senior Engineer_Electrical Testing",
+   "Lending Operations - AM - Merchant Lending",
+   "System Project Leader",
+   "IN_RBIN_Senior Engineer_Product Development_PS-CC",
+   "BGSW_2026_Teamcentre_Soln_Expert"
+  ]
+ },
+ "cost": {
+  "model": "gemini-3.1-flash-lite",
+  "price_in_per_m": 0.25,
+  "price_out_per_m": 1.5,
+  "total_usd": 0.08891,
+  "tokens_in": 146706,
+  "tokens_out": 34822,
+  "distinct_posts_tagged": 493,
+  "per_1k_tagging_only": 0.1703,
+  "per_1k_all_in": 0.1803,
+  "tokens_per_post": [
+   281,
+   67
+  ],
+  "db_size": "20 MB"
+ }
+}
