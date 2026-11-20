@@ -135,9 +135,11 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [ ] "What broke & how we fixed it" notes captured in CHANGELOG as they happen (video material)
 
 ### Phase 5 — Evaluation (plan only, not executed now; task point 3)
-- [ ] `eval/sample_for_review.py`: random stratified sample of 50 tagged posts → CSV
-- [ ] Hand-label role/city/is_fresher → compute per-field accuracy; for each mismatch, pull the ledger entry (`tag_call_id`) to show the model's raw input and output
-- [ ] Cost per 1,000 posts = Σ(`llm_calls.cost_usd`, retries included) / count(distinct tagged jobs) × 1000, at paid-tier prices (+ infra = $0)
+- [x] `eval/sample_for_review.py`: seeded random sample of 50 from all active tagged posts (incl. model-rejected) → `sample.json` + `labels.csv`
+- [x] First-pass gold labels (Claude) with notes on every disagreement; `eval/score.py` → `REPORT.md` (strict/lenient accuracy, Wilson 95% CIs, fresher precision/recall)
+- [x] Cost per 1,000 posts from the ledger: $0.170 tagging-only, $0.180 all-in, at paid-tier prices (infra $0)
+- [ ] **Human confirmation of `labels.csv`** *(user)*, then re-run `score.py`
+- [ ] Optional fixes from `eval/README.md`: deterministic city resolver, senior-title additions (`leader`, `AM`), `_` normalisation, min-years parsing, prompt rule for context-word bias
 
 ---
 
