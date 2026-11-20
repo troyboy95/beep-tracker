@@ -4,6 +4,7 @@ from beep.normalize import (
     eligibility,
     html_to_text,
     is_india,
+    is_senior_title,
     llm_excerpt,
     min_years_required,
     normalize,
@@ -60,6 +61,28 @@ def test_min_years_required(text, expected):
 def test_eligibility(title, text, keep, reason):
     e = eligibility(title, text)
     assert (e.keep, e.reason) == (keep, reason)
+
+
+@pytest.mark.parametrize(
+    "title,senior",
+    [
+        ("Team Leader-LRM- Chennai", True),  # eval: "Leader" slipped past \blead\b
+        ("Financial Analyst - AM - Lending", True),  # eval: Assistant Manager grade
+        ("IN_RBIN_Senior Engineer_Product Development", True),  # eval: "_" defeated \b
+        ("Sales TL - Gurgaon", True),
+        ("DGM Finance", True),
+        ("DM Executive", False),  # Digital Marketing, not Deputy Manager
+        ("I am hiring: Data Analyst", False),  # lower-case "am" is not a grade
+        ("Software Engineer", False),
+        ("Associate _ Project Management Associate", False),
+    ],
+)
+def test_is_senior_title(title, senior):
+    assert is_senior_title(title) is senior
+
+
+def test_underscore_title_still_detects_intern():
+    assert eligibility("IN_Bosch_Intern_Embedded", "5+ years").keep
 
 
 def test_title_precheck_keeps_senior_intern_edge():

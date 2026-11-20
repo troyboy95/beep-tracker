@@ -139,7 +139,9 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [x] First-pass gold labels (Claude) with notes on every disagreement; `eval/score.py` → `REPORT.md` (strict/lenient accuracy, Wilson 95% CIs, fresher precision/recall)
 - [x] Cost per 1,000 posts from the ledger: $0.170 tagging-only, $0.180 all-in, at paid-tier prices (infra $0)
 - [ ] **Human confirmation of `labels.csv`** *(user)*, then re-run `score.py`
-- [ ] Optional fixes from `eval/README.md`: deterministic city resolver, senior-title additions (`leader`, `AM`), `_` normalisation, min-years parsing, prompt rule for context-word bias
+- [x] Eval fixes 1–3: deterministic city resolver (+ `city_source`, migration 004), senior-title additions (`leader`, `AM`/`AGM`/`DGM`/`GM`/`TL`, `avp`), `_` normalisation; strict "Senior = not fresher" rule (user decision). 63 tests pass.
+- [ ] Re-score after the next pipeline run applies the fixes (not yet, per user)
+- [ ] Remaining optional fixes: min-years parsing (#4), prompt rule for context-word bias (#5)
 
 ---
 

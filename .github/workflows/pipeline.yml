@@ -58,8 +58,9 @@ jobs:
       - name: Install
         run: pip install -e .
 
+      # Every mode migrates (idempotent, ~1 s): a drain can run first after a deploy, and its
+      # code may already need a new column.
       - name: Migrate
-        if: env.MODE == 'full'
         run: python -m beep.migrate
 
       - name: Full refresh

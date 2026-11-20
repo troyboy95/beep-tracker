@@ -17,8 +17,9 @@ import time
 from dataclasses import dataclass
 
 from beep import db
+from beep.cities import resolve_city
 from beep.normalize import llm_excerpt
-from beep.tagger import PostInput, Tagger
+from beep.tagger import PostInput, Tag, Tagger
 
 log = logging.getLogger("beep.tag_queue")
 
@@ -38,13 +39,29 @@ class BatchOutcome:
     error: str = ""
 
 
+def _apply_city_rule(tags: list[Tag], batch: list[PostInput]) -> dict[int, str]:
+    """Override the LLM's city where the location names exactly one listed city.
+    Mutates `tags` (after the ledger has stored the raw response); returns id -> source."""
+    loc = {p.id: p.location for p in batch}
+    source: dict[int, str] = {}
+    for t in tags:
+        rule = resolve_city(loc.get(t.id))
+        if rule is not None:
+            t.city = rule
+            source[t.id] = "rule"
+        else:
+            source[t.id] = "llm"
+    return source
+
+
 def _tag_batch(conn, tagger: Tagger, run_id: int, batch: list[PostInput]) -> BatchOutcome:
     tagged, attempt, transient, bad = 0, 1, 0, 0
     call_id = None
     while True:
         res = tagger.call(batch)
         call_id = db.record_llm_call(conn, run_id, res, attempt, call_id)  # ledger first
-        db.apply_tags(conn, res.tags, call_id, res.model)
+        sources = _apply_city_rule(res.tags, batch)
+        db.apply_tags(conn, res.tags, call_id, res.model, sources)
         tagged += len(res.tags)
         done = {t.id for t in res.tags}
         batch = [p for p in batch if p.id not in done]
@@ -73,6 +90,9 @@ def drain(conn, settings, run_id: int) -> int:
     requeued = db.requeue_stale_prompt(conn)
     if requeued:
         log.info("re-queued %d posts tagged with an older prompt version", requeued)
+    fixed = db.apply_city_rules(conn, resolve_city)
+    if fixed:
+        log.info("city rule corrected %d already-tagged posts", fixed)
 
     due = db.posts_to_tag(conn, settings.max_tag_per_run, llm_excerpt)
     log.info("queue: %d due now (depth %d), batches of %d",

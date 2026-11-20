@@ -147,24 +147,46 @@ def posts_to_tag(conn: psycopg.Connection, limit: int, excerpt_fn) -> list[PostI
     ]
 
 
-def apply_tags(conn: psycopg.Connection, tags: list[Tag], call_id: int, model: str) -> None:
+def apply_tags(conn: psycopg.Connection, tags: list[Tag], call_id: int, model: str,
+               city_source: dict[int, str]) -> None:
+    """Write final tags. `city_source[id]` is 'rule' when the city came from the location
+    rule instead of the LLM (the ledger keeps the LLM's original answer either way)."""
     if not tags:
         return
     with conn.transaction(), conn.cursor() as cur:
         cur.executemany(
             """
-            update jobs set role = %s, city = %s, job_type = %s, is_fresher = %s,
-              tag_confidence = %s, tag_model = %s, tag_prompt_version = %s,
+            update jobs set role = %s, city = %s, city_source = %s, job_type = %s,
+              is_fresher = %s, tag_confidence = %s, tag_model = %s, tag_prompt_version = %s,
               tag_call_id = %s, tagged_at = now(),
               tag_status = 'done', next_tag_at = null, last_tag_error = null
             where id = %s
             """,
             [
-                (t.role.value, t.city.value, t.job_type.value, t.is_fresher, t.confidence,
-                 model, PROMPT_VERSION, call_id, t.id)
+                (t.role.value, t.city.value, city_source.get(t.id, "llm"), t.job_type.value,
+                 t.is_fresher, t.confidence, model, PROMPT_VERSION, call_id, t.id)
                 for t in tags
             ],
         )
+
+
+def apply_city_rules(conn: psycopg.Connection, resolve) -> int:
+    """Re-apply the deterministic city rule to already-tagged posts (no LLM calls).
+    Idempotent; lets a rule change fix existing data on the next run."""
+    rows = conn.execute(
+        "select id, location_raw, city from jobs where tag_status = 'done'"
+    ).fetchall()
+    fixes = [
+        (rule.value, jid)
+        for jid, loc, city in rows
+        if (rule := resolve(loc)) is not None and rule.value != city
+    ]
+    if fixes:
+        with conn.transaction(), conn.cursor() as cur:
+            cur.executemany(
+                "update jobs set city = %s, city_source = 'rule' where id = %s", fixes
+            )
+    return len(fixes)
 
 
 def defer_posts(conn: psycopg.Connection, ids: list[int], error: str, delay_s: float,

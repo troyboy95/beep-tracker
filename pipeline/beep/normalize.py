@@ -57,10 +57,25 @@ def is_india(location_raw: str) -> bool:
 # ------------------------------------------------------------------ fresher eligibility
 
 SENIOR_TITLE = re.compile(
-    r"\b(senior|sr\.?|lead|manager|mgr|director|principal|staff|head|vp|vice president|"
-    r"architect|chief|cto|ceo|cfo|partner|expert|specialist ii|ii|iii|iv)\b",
+    r"\b(senior|sr\.?|lead|leader|manager|mgr|director|principal|staff|head|vp|avp|"
+    r"vice president|architect|chief|cto|ceo|cfo|partner|expert|specialist ii|ii|iii|iv)\b",
     re.I,
 )
+# Upper-case-only grade abbreviations ("Financial Analyst - AM - Lending"). Case-sensitive so
+# ordinary words ("I am") never match. "DM" is deliberately absent: in Indian titles it often
+# means Digital Marketing ("DM Executive"), not Deputy Manager.
+SENIOR_GRADE = re.compile(r"\b(AM|AGM|DGM|GM|TL)\b")
+
+
+def _title_for_match(title: str) -> str:
+    """Underscores are word characters, so `\\bSenior` never matches 'IN_RBIN_Senior …'
+    (Bosch-style titles). Treat them as separators before keyword matching."""
+    return title.replace("_", " ")
+
+
+def is_senior_title(title: str) -> bool:
+    t = _title_for_match(title)
+    return bool(SENIOR_TITLE.search(t) or SENIOR_GRADE.search(t))
 # Explicit fresher/early-career signals (title or description).
 EXPLICIT = re.compile(
     r"(\bintern(ship)?s?\b|\btrainee\b|\bapprentice(ship)?\b|\bfreshers?\b|\bnew grad|"
@@ -103,14 +118,14 @@ class Eligibility:
 
 def title_may_be_fresher(title: str) -> bool:
     """Cheap pre-check used by adapters before per-post requests."""
-    return bool(EXPLICIT.search(title)) or not SENIOR_TITLE.search(title)
+    return bool(EXPLICIT.search(_title_for_match(title))) or not is_senior_title(title)
 
 
 def eligibility(title: str, text: str) -> Eligibility:
     """Deterministic pre-filter. The LLM makes the final `is_fresher` call on kept posts."""
-    if EXPLICIT.search(title):
+    if EXPLICIT.search(_title_for_match(title)):
         return Eligibility(True, "explicit", min_years_required(text))
-    if SENIOR_TITLE.search(title):
+    if is_senior_title(title):
         return Eligibility(False, "senior_title", None)
     my = min_years_required(text)
     # A stated minimum above the cap wins over generic description words ("campus", "interns").
