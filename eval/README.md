@@ -11,28 +11,43 @@ Numbers: **[REPORT.md](REPORT.md)** (generated). Raw material: `sample.json` (fu
 3. Where the model's label differs but is a reasonable reading (e.g. *Design* vs *Marketing & Content* for a video editor), the field is marked `alt_ok`. The report shows **strict** and **lenient** accuracy.
 4. `score.py` computes accuracy with 95% Wilson intervals (n = 50 is small), fresher precision/recall, and cost per 1,000 posts from the `llm_calls` ledger.
 
-**Confirming the labels:** the first labelling pass was done by Claude (an LLM checking an LLM). To make it a true hand-check, review `labels.csv`. Edit any `gold_*`, `alt_ok` or `notes` cell you disagree with, set `reviewer` to your name, and re-run:
+**Labels are human-confirmed.** Claude did the first labelling pass, with a note on every disagreement. A human then verified all 50 labels on 2026-11-20 and accepted them without changes (`reviewer` column). To revise a label later, edit its `gold_*`, `alt_ok` or `notes` cell and re-run:
 
 ```bash
-PYTHONPATH=pipeline pipeline/.venv/Scripts/python eval/score.py   # rewrites REPORT.md
+PYTHONPATH=pipeline pipeline/.venv/Scripts/python eval/score.py labels.csv REPORT.md " (before fixes)"
+PYTHONPATH="pipeline:eval" pipeline/.venv/Scripts/python eval/rescore_after_fixes.py   # → REPORT_after.md
 ```
 
-## Results (first pass)
+## Results
 
-| | Strict | Lenient |
-|---|---|---|
-| Role | 90% | 100% |
-| City | 92% | 94% |
-| Job type | 100% | 100% |
-| Fresher (0–2 yrs) | 88% | 88% |
-| All four correct | 70% | 82% |
+Same 50 posts, same gold labels, before and after fixes 1–3 ([REPORT.md](REPORT.md) → [REPORT_after.md](REPORT_after.md)):
 
-Fresher filter, as users see it: **87% precision** (4 of 31 shown posts shouldn't be), **93% recall**.
-Cost: **$0.17 per 1,000 posts** tagging-only, **$0.18 all-in** (retries + re-tags), at paid-tier prices; $0 actually billed.
+| Field | Before (strict) | After (strict) | After (lenient) |
+|---|---|---|---|
+| Role | 90% | 90% | 100% |
+| City | 92% | **100%** | 100% |
+| Job type | 100% | 100% | 100% |
+| Fresher (0–2 yrs) | 86% | **94%** | 94% |
+| **All four correct** | 68% | **84%** | **94%** |
+| Fresher precision (what users see) | 84% (26/31) | **96%** (26/27) | |
+| Fresher recall | 93% (26/28) | 93% (26/28) | |
+
+Cost: **$0.17 per 1,000 posts** tagging-only, **$0.18 all-in** (retries + re-tags), at paid-tier prices; $0 actually billed. The fixes are deterministic, so they add no LLM cost (and the senior-title filter removes some calls).
+
+**Read these "after" numbers with care.** The fixes were designed from errors in *this* sample, so the in-sample gain overstates what a new sample would show. Supporting evidence: the city rule's error class was confirmed across the whole population (25 of 44 "Other (India)" posts, all now fixed). The title rules target patterns (Leader/AM/Senior grades) that recur across Paytm and Bosch boards. A fresh 50-post sample is the honest out-of-sample check.
+
+**What "after" measures:** the system's output once the next *full* run applies everything. City/role/job type are the posts' current DB tags (the city rule is already applied). `is_fresher` is `False` where the new pre-filter drops the post, otherwise the current LLM tag (`rescore_after_fixes.py`).
+
+**Gold-label change:** post 377 (Bosch "Senior Engineer", asks 2+ yrs) was relabelled not-fresher after the strict "Senior" rule was adopted. The "before" column is re-scored with that label, which is why it reads 86% / 84% rather than the first pass's 88% / 87%.
+
+**Errors that remain (8):** 5 role choices that are defensible alternatives (lenient-correct) and 3 `is_fresher` misses:
+- MongoDB "Early Talent Recruiter" (needs 4+ yrs) shown: context-word bias, fix #5.
+- Paytm CSR coordinator (2–4 yrs) hidden: the LLM is too strict on "minimum 2".
+- Bosch logistics analyst (no years stated) hidden: borderline under the generous rule.
 
 ## Where it goes wrong, and fixes
 
-> **Status (2026-11-20):** fixes 1–3 are implemented but **not yet re-scored**. `REPORT.md` still shows the pre-fix numbers, and `labels.csv` records the model's tags *at sampling time*. To measure the fixes, re-sample model tags for the same 50 ids after the next pipeline run, then re-run `score.py`.
+> **Status (2026-11-20):** fixes 1–3 are deployed (commit `e20d4a2`; migration 004 and the city rule applied by drain run #10) and re-scored. See Results above.
 
 | # | Failure | Evidence | Fix | Expected effect |
 |---|---|---|---|---|

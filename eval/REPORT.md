@@ -1,7 +1,7 @@
-# Tagging accuracy: 50-post hand check
+# Tagging accuracy: 50-post hand check (before fixes)
 
 - Sample: 50 posts drawn at random (seed `20261120`) from **454 active tagged posts** on 2026-11-20. This includes posts the model *rejected* as non-fresher, so `is_fresher` is tested both ways.
-- Reviewer: claude (first pass; pending human confirmation). Gold labels follow the same written rules as the prompt (fresher = minimum required experience ≤ 2 yrs, or none stated and not a senior/managerial role).
+- Reviewer: human-confirmed 2026-11-20 (first pass: claude). Gold labels follow the same written rules as the prompt (fresher = minimum required experience ≤ 2 yrs, or none stated and not a senior/managerial role).
 - *Strict* = exact match. *Lenient* also accepts a different-but-defensible label the reviewer marked `alt_ok`.
 
 ## Accuracy per field
@@ -11,13 +11,13 @@
 | role | 45/50 = **90%** (95% CI 79%–96%) | 50/50 = **100%** (95% CI 93%–100%) |
 | city | 46/50 = **92%** (95% CI 81%–97%) | 47/50 = **94%** (95% CI 84%–98%) |
 | job_type | 50/50 = **100%** (95% CI 93%–100%) | 50/50 = **100%** (95% CI 93%–100%) |
-| is_fresher | 44/50 = **88%** (95% CI 76%–94%) | 44/50 = **88%** (95% CI 76%–94%) |
-| **all 4 fields** | 35/50 = **70%** (95% CI 56%–81%) | 41/50 = **82%** (95% CI 69%–90%) |
+| is_fresher | 43/50 = **86%** (95% CI 74%–93%) | 43/50 = **86%** (95% CI 74%–93%) |
+| **all 4 fields** | 34/50 = **68%** (95% CI 54%–79%) | 40/50 = **80%** (95% CI 67%–89%) |
 
 ## What users see: the fresher filter
 
-- **Precision** (shown posts that really are fresher-eligible): 27/31 = **87%** (95% CI 71%–95%)
-- **Recall** (fresher-eligible posts that get shown): 27/29 = **93%** (95% CI 78%–98%)
+- **Precision** (shown posts that really are fresher-eligible): 26/31 = **84%** (95% CI 67%–93%)
+- **Recall** (fresher-eligible posts that get shown): 26/28 = **93%** (95% CI 77%–98%)
 
 ## Every disagreement
 
@@ -35,6 +35,7 @@
 | 274 | NielsenIQ: Learning Platform & Customer Education Administra | city | Other (India) | Pune | no | Pune is in the city list; model used Other (India). 3–7 yrs → not fresher (correct) |
 | 305 | Swiggy: Executive - Video Editor | role | Design | Marketing & Content | yes | Video editor for a food-media brand; Design defensible |
 | 357 | Bosch: 2026/02: HW Developer for Electronic Control Unit | role | Core Engineering | Hardware & Embedded | yes | Power-electronics HW for an ECU; Core Engineering (electrical) defensible |
+| 377 | Bosch: IN_RBIN_Senior Engineer_Product Development_PS-CC | is_fresher | True | False | no | Bosch 'Senior Engineer' grade asking 2+ yrs. Product decision 2026-11-20: any Senior/Sr. title is not fresher, whatever the years (strict rule) |
 | 423 | Bosch: EDR Function Responsible for BEG Airbag projects | role | Software Engineering | Hardware & Embedded | yes | Airbag ECU software requirements = embedded; Software Engineering defensible |
 | 440 | Bosch: Logistics System Analyst & Rollout Engineer | is_fresher | False | True | no | No years stated, not a senior title → fresher by rule; borderline ('proven experience', project mgmt) |
 | 1985 | Paytm: Financial Analyst - AM - Lending | is_fresher | True | False | no | 'AM' = Assistant Manager, a managerial grade; borderline (AM is often 2–4 yrs in India) |

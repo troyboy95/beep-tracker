@@ -138,9 +138,11 @@ IMPLEMENTATION_PLAN.md  CHANGELOG.md  PROMPT_LOG.md  README.md  SOURCES.md
 - [x] `eval/sample_for_review.py`: seeded random sample of 50 from all active tagged posts (incl. model-rejected) → `sample.json` + `labels.csv`
 - [x] First-pass gold labels (Claude) with notes on every disagreement; `eval/score.py` → `REPORT.md` (strict/lenient accuracy, Wilson 95% CIs, fresher precision/recall)
 - [x] Cost per 1,000 posts from the ledger: $0.170 tagging-only, $0.180 all-in, at paid-tier prices (infra $0)
-- [ ] **Human confirmation of `labels.csv`** *(user)*, then re-run `score.py`
+- [x] **Human confirmation of `labels.csv`** (2026-11-20; all 50 accepted unchanged); reports regenerated
 - [x] Eval fixes 1–3: deterministic city resolver (+ `city_source`, migration 004), senior-title additions (`leader`, `AM`/`AGM`/`DGM`/`GM`/`TL`, `avp`), `_` normalisation; strict "Senior = not fresher" rule (user decision). 63 tests pass.
-- [ ] Re-score after the next pipeline run applies the fixes (not yet, per user)
+- [x] Re-scored the same 50 after deploy: city 92→100%, fresher 86→94%, all-four 68→84% strict / 94% lenient, precision 84→96% (in-sample; see caveat in `eval/README.md`)
+- [ ] Optional: fresh 50-post sample for an out-of-sample check
+- [ ] Next full run applies the senior-title filter in prod (public ~281 → ~263); verify
 - [ ] Remaining optional fixes: min-years parsing (#4), prompt rule for context-word bias (#5)
 
 ---

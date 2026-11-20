@@ -60,8 +60,8 @@ def ledger_cost() -> dict | None:
     }
 
 
-def main() -> None:
-    rows = list(csv.DictReader((HERE / "labels.csv").open(encoding="utf-8")))
+def main(labels: str = "labels.csv", out: str = "REPORT.md", title: str = "") -> None:
+    rows = list(csv.DictReader((HERE / labels).open(encoding="utf-8")))
     meta = json.loads((HERE / "sample.json").read_text(encoding="utf-8"))["meta"]
     n = len(rows)
     if any(not r[f"gold_{f}"] for r in rows for f in FIELDS):
@@ -72,7 +72,7 @@ def main() -> None:
             return True
         return lenient and f in r["alt_ok"].split(";")
 
-    lines = ["# Tagging accuracy: 50-post hand check", ""]
+    lines = [f"# Tagging accuracy: 50-post hand check{title}", ""]
     lines += [
         f"- Sample: {n} posts drawn at random (seed `{meta['seed']}`) from "
         f"**{meta['population_active_tagged']} active tagged posts** on {meta['drawn_at'][:10]}. "
@@ -138,9 +138,11 @@ def main() -> None:
             f"**${cost['all_in_per_1k']:.3f}** |",
             "| Infrastructure (Vercel Hobby, Supabase Free, GitHub Actions public, Gemini free tier) | $0 |",
         ]
-    (HERE / "REPORT.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (HERE / out).write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    main(*sys.argv[1:4])
