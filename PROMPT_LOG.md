@@ -89,3 +89,8 @@ Added a `--tag-only` drain mode. Verified on the real 503 backlog: queue 45 → 
 > Ran one full workflow, still seeing 276 openings
 
 **Outcome:** Traced the run across GitHub Actions (success), the DB (`ingest_runs` #4: manual/full/success, 0 new, 1 updated, 1 tagged) and the live page (stamp updated to the run's finish time without a redeploy). This confirmed the full prod chain, including revalidation. Explained 277 → 276: one Paytm "Team Leader" post was edited upstream, re-tagged, and is now correctly non-fresher. That surfaced a pre-filter gap ("Leader" isn't matched as a senior title). Re-ran the UI interaction suite against prod: all behaviour checks pass.
+
+### Prompt 12
+> update readme, with cost
+
+**Outcome:** Rewrote `README.md`: live URL, at-a-glance table (sources, volume, accuracy, cost), how it works, authentication table. The cost section was pulled fresh from the ledger and run history: $0.170 per 1,000 posts tagging-only / $0.180 all-in, ~281/67 tokens per post, $0.089 total to date, steady state ≈ $0.11/month at paid prices. Infra is $0 on free tiers (Supabase 20 MB of 500 MB). Kept the user's removal of the task section; removed stale notes; documented the web CI job.
